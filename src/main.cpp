@@ -92,7 +92,7 @@ PsiMain::PsiMain(const QHash<QString, QString>& commandline, QObject *par)
 	pcon = 0;
 
 	// migrate old (pre 0.11) registry settings...
-	QSettings sUser(QSettings::UserScope, "psi-im.org", "Psi");
+    QSettings sUser(QSettings::UserScope, "mconf.org", "Mconf");
 	lastProfile = sUser.value("last_profile").toString();
 	lastLang = sUser.value("last_lang").toString();
 	autoOpen = sUser.value("auto_open", QVariant(false)).toBool();

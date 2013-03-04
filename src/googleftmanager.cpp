@@ -319,7 +319,7 @@ void GoogleFTManager::initialize()
 		talk_base::ThreadManager::SetCurrent(thread_);
 		thread_->Start();
 		network_manager_ = new talk_base::NetworkManager();
-		port_allocator_.reset(new cricket::HttpPortAllocator(network_manager_, "psi"));
+        port_allocator_.reset(new cricket::HttpPortAllocator(network_manager_, "mconf"));
 	}
 
 	listener_ = new GoogleSessionListener(this); 
@@ -327,7 +327,7 @@ void GoogleFTManager::initialize()
 	session_manager_->SignalOutgoingMessage.connect(listener_, &GoogleSessionListener::sendStanza);
 	//session_manager_->SignalRequestSignaling.connect(session_manager_, &cricket::SessionManager::OnSignalingReady);
 	session_manager_->SignalRequestSignaling.connect(listener_, &GoogleSessionListener::signalingReady);
-	file_share_session_client_.reset(new cricket::FileShareSessionClient(session_manager_.get(), j, "psi"));
+    file_share_session_client_.reset(new cricket::FileShareSessionClient(session_manager_.get(), j, "mconf"));
 	file_share_session_client_->SignalFileShareSessionCreate.connect(listener_, &GoogleSessionListener::fileShareSessionCreated);
 	session_manager_->AddClient(NS_GOOGLE_SHARE, file_share_session_client_.get());
 
