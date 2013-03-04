@@ -66,8 +66,8 @@
 				<legacy-ssl-probe comment="Show legacy SSL probe option" type="bool">true</legacy-ssl-probe>
 				<manual-host comment="Enable manual host configuration" type="bool">true</manual-host>
 				<priority comment="Allow changing the priority" type="bool">true</priority>
-				<privacy comment="Options related to the privacy UI">
-					<show comment="Show the privacy UI" type="bool">true</show>
+                                <privacy comment="Options related to the privacy UI">
+                                        <show comment="Show the privacy UI" type="bool">true</show>
 				</privacy>
 				<proxy comment="Options related to the proxy UI">
 					<show comment="Show the proxy UI" type="bool">true</show>
@@ -121,9 +121,9 @@
 					<single-line comment="Show status messages on the same line as the nickname" type="bool">true</single-line>
 					<show comment="Show status messages" type="bool">false</show>
 				</status-messages>
-				<tooltip comment="Display options for the contact list tooltips">
+                                <tooltip comment="Display options for the contact list tooltips">
 					<avatar comment="Display avatar" type="bool">true</avatar>
-					<client-version comment="Display client version information" type="bool">true</client-version>
+                                        <client-version comment="Display client version information" type="bool">false</client-version>
 					<last-status comment="Display the last status" type="bool">true</last-status>
 					<pgp comment="Display PGP information" type="bool">true</pgp>
 				</tooltip>
@@ -147,7 +147,8 @@
 				</show>
 				<show-group-counts type="bool">true</show-group-counts>
 				<show-menubar type="bool">true</show-menubar>
-				<toolbars/>
+                                <toolbars>
+                                </toolbars>
 				<toolbars-state type="QByteArray"/>
 				<use-left-click type="bool">false</use-left-click>
 				<use-single-click type="bool">false</use-single-click>
@@ -204,7 +205,7 @@
 				</service-discovery>
 			</show-deprecated>
 			<spell-check comment="Options related to the spell checker">
-				<enabled comment="Whether the spell checker is enabled" type="bool">true</enabled>
+                                <enabled comment="Whether the spell checker is enabled" type="bool">false</enabled>
 			</spell-check>
 			<systemtray comment="Options related to the system tray">
 				<use-old comment="Use the old system tray code (deprecated)" type="bool">false</use-old>
@@ -212,13 +213,13 @@
 				<use-double-click type="bool">false</use-double-click>
 			</systemtray>
 			<tip comment="Tip of the day options">
-				<show comment="Show the tip of the day upon startup" type="bool">true</show>
+                                <show comment="Show the tip of the day upon startup" type="bool">false</show>
 				<number comment="The next tip to show" type="int">0</number>
 			</tip>
 			<flash-windows comment="Allow windows to flash upon activity" type="bool">true</flash-windows>
 			<automatically-copy-selected-text type="bool">false</automatically-copy-selected-text>
 			<emoticons>
-				<use-emoticons type="bool">true</use-emoticons>
+                                <use-emoticons type="bool">false</use-emoticons>
 			</emoticons>
 			<file-transfer>
 				<auto-popup type="bool">false</auto-popup>
@@ -398,7 +399,7 @@
 			<service-discovery comment="Shortcuts in the service discovery dialog"/>
 		</shortcuts>
 		<contactlist>
-			<hide-on-start type="bool">false</hide-on-start>
+                        <hide-on-start type="bool">true</hide-on-start>
 			<resolve-nicks-on-contact-add type="bool">false</resolve-nicks-on-contact-add>
 			<use-toolwindow type="bool">false</use-toolwindow>
 		</contactlist>
