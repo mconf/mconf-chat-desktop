@@ -172,7 +172,7 @@
 			</contactlist>
 			<menu comment="Options for the menu">
 				<account comment="Options for the account-specific menu">
-					<admin comment="Show the 'admin' menu" type="bool">true</admin>
+                                        <admin comment="Show the 'admin' menu" type="bool">true</admin>
 				</account>
 				<contact comment="Options for the contact-specific menu">
 					<active-chats comment="Show the 'active chats' menu" type="bool">true</active-chats>
@@ -399,7 +399,7 @@
 			<service-discovery comment="Shortcuts in the service discovery dialog"/>
 		</shortcuts>
 		<contactlist>
-                        <hide-on-start type="bool">true</hide-on-start>
+                        <hide-on-start type="bool">false</hide-on-start>
 			<resolve-nicks-on-contact-add type="bool">false</resolve-nicks-on-contact-add>
 			<use-toolwindow type="bool">false</use-toolwindow>
 		</contactlist>
