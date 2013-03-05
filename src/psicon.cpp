@@ -1718,14 +1718,8 @@ PsiActionList *PsiCon::actionList() const
  */
 void PsiCon::promptUserToCreateAccount()
 {
-	QMessageBox msgBox(QMessageBox::Question,tr("Account setup"),tr("You need to set up an account to start. Would you like to register a new account, or use an existing account?"));
-	QPushButton *existingButton = msgBox.addButton(tr("Use existing account"),QMessageBox::AcceptRole);
-	msgBox.addButton(QMessageBox::Cancel);
-	msgBox.exec();
-	if (msgBox.clickedButton() ==  existingButton) {
-		AccountModifyDlg w(this);
-		w.exec();
-	}
+    AccountModifyDlg w(this);
+    w.exec();
 }
 
 QString PsiCon::optionsFile() const
