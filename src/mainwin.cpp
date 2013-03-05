@@ -166,7 +166,7 @@ void MainWin::Private::registerActions()
 		const char* name;
 		int id;
 	} statuslist[] = {
-		{ "status_chat",      STATUS_CHAT      },
+        { "status_chat",      STATUS_CHAT      },
 		{ "status_online",    STATUS_ONLINE    },
 		{ "status_away",      STATUS_AWAY      },
 		{ "status_xa",        STATUS_XA        },
@@ -230,7 +230,7 @@ void MainWin::Private::updateMenu(QStringList actions, QMenu* menu)
 		if ( name == "diagnostics" ) {
 			QMenu* diagMenu = new QMenu(tr("Diagnostics"), menu);
 			getAction("help_diag_qcaplugin")->addTo(diagMenu);
-			getAction("help_diag_qcakeystore")->addTo(diagMenu);
+            getAction("help_diag_qcakeystore")->addTo(diagMenu);
 			menu->addMenu(diagMenu);
 			continue;
 		}
@@ -378,7 +378,7 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon* psi)
 	mainMenuBar()->addMenu(mainMenu);
 	d->getAction("menu_options")->addTo(mainMenu);
 	d->getAction("menu_quit")->addTo(mainMenu);
-	d->getAction("help_about")->addTo(mainMenu);
+    d->getAction("help_about")->addTo(mainMenu);
 	d->getAction("help_about_qt")->addTo(mainMenu);
 
 	d->mainMenu = new QMenu(tr("General"), this);
@@ -525,8 +525,9 @@ void MainWin::registerAction( IconAction* action )
 		{ "help_online_forum", activated, this, SLOT( actOnlineForumActivated() ) },
 		{ "help_psi_muc",     activated, this, SLOT( actJoinPsiMUCActivated() ) },
 		{ "help_report_bug",  activated, this, SLOT( actBugReportActivated() ) },
-		{ "help_about",       activated, this, SLOT( actAboutActivated() ) },
-		{ "help_about_qt",    activated, this, SLOT( actAboutQtActivated() ) },
+        { "help_about_mconf",       activated, this, SLOT( actAboutMconfActivated() ) },
+        { "help_about",       activated, this, SLOT( actAboutActivated() ) },
+        { "help_about_qt",    activated, this, SLOT( actAboutQtActivated() ) },
 		{ "help_about_psimedia",   activated, this, SLOT( actAboutPsiMediaActivated() ) },
 		{ "help_diag_qcaplugin",   activated, this, SLOT( actDiagQCAPluginActivated() ) },
 		{ "help_diag_qcakeystore", activated, this, SLOT( actDiagQCAKeyStoreActivated() ) },
@@ -669,8 +670,8 @@ void MainWin::buildStatusMenu()
 	d->statusMenu->addSeparator();
 	d->getAction("status_offline")->addTo(d->statusMenu);
 #ifdef USE_PEP
-	d->statusMenu->addSeparator();
-	d->getAction("publish_tune")->addTo(d->statusMenu);
+    //d->statusMenu->addSeparator();
+    //d->getAction("publish_tune")->addTo(d->statusMenu);
 #endif
 }
 
@@ -759,14 +760,15 @@ void MainWin::buildOptionsMenu()
 	actions << "help_readme"
 			<< "help_tip"
 			<< "separator"
-			<< "help_online_help"
-			<< "help_online_wiki"
-			<< "help_online_home"
-			<< "help_online_forum"
-			<< "help_psi_muc"
-			<< "help_report_bug"
-			<< "diagnostics"
+            //<< "help_online_help"
+            //<< "help_online_wiki"
+            //<< "help_online_home"
+            //<< "help_online_forum"
+            //<< "help_psi_muc"
+            //<< "help_report_bug"
+            //<< "diagnostics"
 			<< "separator"
+            << "help_about_mconf"
 			<< "help_about"
 			<< "help_about_qt";
 
@@ -874,6 +876,11 @@ void MainWin::actJoinPsiMUCActivated()
 void MainWin::actBugReportActivated ()
 {
 	DesktopUtil::openUrl("http://forum.psi-im.org/forum/2");
+}
+
+void MainWin::actAboutMconfActivated ()
+{
+    DesktopUtil::openUrl("http://mconf.org/");
 }
 
 void MainWin::actAboutActivated ()

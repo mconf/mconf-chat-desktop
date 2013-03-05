@@ -233,21 +233,21 @@ void PsiActionList::Private::createMainWin()
 		IconAction *actFileTrans = new IconAction (tr("Transfer Manager"), "psi/filemanager", tr("Trans&fer Manager"), 0, this);
 		actFileTrans->setWhatsThis (tr("Opens the transfer manager dialog"));
 
-		ActionNames actions[] = {
-			{ "menu_disco",           actDisco         },
-			{ "menu_add_contact",     add_act          },
-			{ "menu_new_message",     actNewMessage    },
-			{ "menu_join_groupchat",  actJoinGroupchat },
-			{ "menu_account_setup",   actAccountSetup  },
-			{ "menu_options",         actOptions       },
-			{ "menu_file_transfer",   actFileTrans     },
-			{ "menu_toolbars",        actToolbars      },
-			{ "menu_xml_console",     lw_act           },
-			{ "menu_change_profile",  actChangeProfile },
-			{ "menu_play_sounds",     actPlaySounds    },
-			{ "menu_quit",            actQuit          },
-			{ "", 0 }
-		};
+         ActionNames actions[] = {
+            //{ "menu_disco",           actDisco         },
+            //{ "menu_add_contact",     add_act          },
+            //{ "menu_new_message",     actNewMessage    },
+            //{ "menu_join_groupchat",  actJoinGroupchat },
+            { "menu_account_setup",   actAccountSetup  },
+            { "menu_options",         actOptions       },
+            //{ "menu_file_transfer",   actFileTrans     },
+            { "menu_toolbars",        actToolbars      },
+            //{ "menu_xml_console",     lw_act           },
+            { "menu_change_profile",  actChangeProfile },
+            { "menu_play_sounds",     actPlaySounds    },
+            { "menu_quit",            actQuit          },
+            { "", 0 }
+        };
 
 		createActionList( tr( "Menu Items" ), Actions_MainWin, actions );
 	}
@@ -344,7 +344,10 @@ void PsiActionList::Private::createMainWin()
 		IconAction *actBugReport = new IconAction (tr("Report a Bug (Online)"), tr("Report a &Bug (Online)"), 0, this);
 		actBugReport->setWhatsThis (tr("Report a Bug (Online)"));
 
-		IconAction *actAbout = new IconAction (tr("About"), "psi/logo_16", tr("&About"), 0, this);
+        IconAction *actAboutMconf = new IconAction (tr("About Mconf"), "psi/mconf_logo_16", tr("&About Mconf"), 0, this);
+        actAboutMconf->setMenuRole(QAction::AboutRole);
+
+        IconAction *actAbout = new IconAction (tr("About Psi"), "psi/logo_16", tr("&About Psi"), 0, this);
 		actAbout->setMenuRole(QAction::AboutRole);
 
 		IconAction *actAboutQt = new IconAction (tr("About Qt"), tr("About &Qt"), 0, this);
@@ -367,6 +370,7 @@ void PsiActionList::Private::createMainWin()
 			{ "help_online_forum",     actOnlineForum     },
 			{ "help_psi_muc",          actPsiMUC          },
 			{ "help_report_bug",       actBugReport       },
+            { "help_about_mconf",      actAboutMconf      },
 			{ "help_about",            actAbout           },
 			{ "help_about_qt",         actAboutQt         },
 			{ "help_about_psimedia",   actAboutPsiMedia   },

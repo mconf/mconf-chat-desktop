@@ -124,6 +124,7 @@ private slots:
 	void actOnlineForumActivated ();
 	void actJoinPsiMUCActivated();
 	void actBugReportActivated ();
+    void actAboutMconfActivated ();
 	void actAboutActivated ();
 	void actAboutQtActivated ();
 	void actAboutPsiMediaActivated ();
