@@ -183,8 +183,8 @@
 					<change-profile comment="Show the 'change profile' menu" type="bool">true</change-profile>
 				</main>
 				<status comment="Options for the status menu">
-					<chat comment="Enable free for chat" type="bool">true</chat>
-					<xa comment="Enable extended away/not available" type="bool">true</xa>
+                                        <chat comment="Enable free for chat" type="bool">false</chat>
+                                        <xa comment="Enable extended away/not available" type="bool">false</xa>
 					<invisible comment="Enable invisibility" type="bool">false</invisible>
 				</status>
 				<view comment="Options for the view menu">
