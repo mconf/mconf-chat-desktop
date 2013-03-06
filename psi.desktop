@@ -2,11 +2,11 @@
 # This is the spec version, *not* the application version
 Version=1.0
 Type=Application
-Name=Psi
+Name=Mconf
 GenericName=XMPP Client
 Comment=Communicate over the XMPP network
-Icon=psi
-Exec=psi %U
+Icon=mconf
+Exec=mconf %U
 MimeType=x-scheme-handler/xmpp;
 Terminal=false
 Categories=Network;InstantMessaging;Qt;
