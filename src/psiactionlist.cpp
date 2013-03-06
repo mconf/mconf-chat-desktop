@@ -184,15 +184,15 @@ void PsiActionList::Private::createMainWin()
 
 
 	{
-		IconAction *add_act = 0;
-		if (!PsiOptions::instance()->getOption("options.ui.contactlist.lockdown-roster").toBool())
-			add_act = new MAction(IconsetFactory::icon("psi/addContact"), tr("&Add a Contact"), 0, psi, this);
+//		IconAction *add_act = 0;
+//		if (!PsiOptions::instance()->getOption("options.ui.contactlist.lockdown-roster").toBool())
+//			add_act = new MAction(IconsetFactory::icon("psi/addContact"), tr("&Add a Contact"), 0, psi, this);
 
-		IconAction *lw_act = new MAction(IconsetFactory::icon("psi/xml"), tr("&XML Console"), 2, psi, this);
+//		IconAction *lw_act = new MAction(IconsetFactory::icon("psi/xml"), tr("&XML Console"), 2, psi, this);
 
-		IconAction *actDisco = 0;
-		if(!PsiOptions::instance()->getOption("options.ui.contactlist.disable-service-discovery").toBool())
-			actDisco = new MAction(IconsetFactory::icon("psi/disco"), tr("Service &Discovery"), 3, psi, this);
+//		IconAction *actDisco = 0;
+//		if(!PsiOptions::instance()->getOption("options.ui.contactlist.disable-service-discovery").toBool())
+//			actDisco = new MAction(IconsetFactory::icon("psi/disco"), tr("Service &Discovery"), 3, psi, this);
 
 //		IconAction *actReadme = new IconAction (tr("ReadMe"), tr("&ReadMe"), 0, this);
 //		actReadme->setWhatsThis (tr("Show ReadMe file"));
@@ -209,8 +209,8 @@ void PsiActionList::Private::createMainWin()
 //		IconAction *actBugReport = new IconAction (tr("Report a Bug"), tr("Report a &Bug"), 0, this);
 //		actBugReport->setWhatsThis (tr("Report a Bug"));
 
-		IconAction *actNewMessage = new IconAction (tr("New Blank Message"), "psi/sendMessage", tr("New &Blank Message"), 0, this);
-		IconAction *actJoinGroupchat = new IconAction (tr("Join Groupchat"), "psi/groupChat", tr("Join &Groupchat"), 0, this);
+//		IconAction *actNewMessage = new IconAction (tr("New Blank Message"), "psi/sendMessage", tr("New &Blank Message"), 0, this);
+//		IconAction *actJoinGroupchat = new IconAction (tr("Join Groupchat"), "psi/groupChat", tr("Join &Groupchat"), 0, this);
 		IconAction *actAccountSetup = new IconAction (tr("Account Setup"), "psi/account", tr("Acc&ount Setup"), 0, this);
 
 		IconAction *actOptions = new IconAction (tr("Options"), "psi/options", tr("&Options"), 0, this);
