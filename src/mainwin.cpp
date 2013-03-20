@@ -638,15 +638,15 @@ void MainWin::setUseDock(bool use)
 
 	Q_ASSERT(!d->tray);
 	if (use) {
-		d->tray = new PsiTrayIcon(ApplicationInfo::name(), d->trayMenu);
-		connect(d->tray, SIGNAL(clicked(const QPoint &, int)), SLOT(trayClicked(const QPoint &, int)));
-		connect(d->tray, SIGNAL(doubleClicked(const QPoint &)), SLOT(trayDoubleClicked()));
-		d->tray->setIcon(PsiIconset::instance()->statusPtr(STATUS_OFFLINE));
+        d->tray = new PsiTrayIcon(ApplicationInfo::name(), d->trayMenu);
+        connect(d->tray, SIGNAL(clicked(const QPoint &, int)), SLOT(trayClicked(const QPoint &, int)));
+        connect(d->tray, SIGNAL(doubleClicked(const QPoint &)), SLOT(trayDoubleClicked()));
+        d->tray->setIcon(PsiIconset::instance()->statusPtr(STATUS_OFFLINE));
 		d->tray->setToolTip(ApplicationInfo::name());
 
 		updateReadNext(d->nextAnim, d->nextAmount);
 
-		d->tray->show();
+        d->tray->show();
 	}
 }
 
@@ -993,7 +993,7 @@ void MainWin::activatedAccOption(PsiAccount* pa, int x)
 void MainWin::buildTrayMenu()
 {
 #ifndef Q_OS_MAC
-	d->trayMenu->clear();
+    d->trayMenu->clear();
 
 	if(d->nextAmount > 0) {
 		d->trayMenu->addAction(tr("Receive next event"), this, SLOT(doRecvNextEvent()));
@@ -1006,10 +1006,10 @@ void MainWin::buildTrayMenu()
 	else {
 		d->trayMenu->addAction(tr("&Hide"), this, SLOT(trayHide()));
 	}
-	d->optionsButton->addTo(d->trayMenu);
-	d->trayMenu->addMenu(d->statusMenu);
+    //d->optionsButton->addTo(d->trayMenu);
+    //d->trayMenu->addMenu(d->statusMenu);
 
-	d->trayMenu->addSeparator();
+    //d->trayMenu->addSeparator();
 	// TODO!
 	d->getAction("menu_quit")->addTo(d->trayMenu);
 #endif
@@ -1020,7 +1020,7 @@ void MainWin::setTrayToolTip(int status)
 	if (!d->tray) {
 		return;
 	}
-	d->tray->setToolTip(QString("Psi - " + status2txt(status)));
+    d->tray->setToolTip(QString("Mconf - " + status2txt(status)));
 }
 
 void MainWin::decorateButton(int status)
@@ -1104,7 +1104,7 @@ void MainWin::keyPressEvent(QKeyEvent* e)
 #ifdef Q_OS_MAC
 	bool allowed = true;
 #else
-	bool allowed = d->tray ? true: false;
+    bool allowed = d->tray ? true: false;
 #endif
 
 	bool closekey = false;
@@ -1329,7 +1329,7 @@ void MainWin::updateTray()
 	}
 
 	buildTrayMenu();
-	d->tray->setContextMenu(d->trayMenu);
+    d->tray->setContextMenu(d->trayMenu);
 }
 
 void MainWin::doRecvNextEvent()
