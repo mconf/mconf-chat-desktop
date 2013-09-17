@@ -3,7 +3,7 @@ This is a branch of the Psi project (http://psi-im.org/) to implement the multip
 
 Setting up enviroment
 ==========
-To start work with this project, there are two simple steps: installing the dependencies and cloning the repository.
+To start work with this project, there are two simple steps: installing the dependencies and getting the source.
 
 
 Dependencies
