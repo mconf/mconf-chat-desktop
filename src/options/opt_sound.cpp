@@ -116,13 +116,13 @@ QWidget *OptionsTabSound::widget()
 
 	// TODO: add QWhatsThis for all widgets
 
-	d->le_player->setWhatsThis(
-		tr("If your system supports multiple sound players, you may"
-		" choose your preferred sound player application here."));
+//    d->le_player->setWhatsThis(
+//		tr("If your system supports multiple sound players, you may"
+//		" choose your preferred sound player application here."));
 	d->ck_awaySound->setWhatsThis(
 		tr("Enable this option if you wish to hear sound alerts when your status is \"away\" or \"extended away\"."));
-	d->ck_gcSound->setWhatsThis(
-		tr("Play sounds for all events in groupchat, not only for mentioning of your nick."));
+//	d->ck_gcSound->setWhatsThis(
+//		tr("Play sounds for all events in groupchat, not only for mentioning of your nick."));
 
 #if defined(Q_OS_WIN)
 	d->lb_player->hide();
@@ -141,9 +141,9 @@ void OptionsTabSound::applyOptions()
 		return;
 
 	OptSoundUI *d = (OptSoundUI *)w;
-	PsiOptions::instance()->setOption("options.ui.notifications.sounds.unix-sound-player", d->le_player->text());
+//	PsiOptions::instance()->setOption("options.ui.notifications.sounds.unix-sound-player", d->le_player->text());
 	PsiOptions::instance()->setOption("options.ui.notifications.sounds.silent-while-away", !d->ck_awaySound->isChecked());
-	PsiOptions::instance()->setOption("options.ui.notifications.sounds.notify-every-muc-message", d->ck_gcSound->isChecked());
+//	PsiOptions::instance()->setOption("options.ui.notifications.sounds.notify-every-muc-message", d->ck_gcSound->isChecked());
 	
 	PsiOptions::instance()->setOption("options.ui.notifications.sounds.incoming-message", d->le_oeMessage->text());
 	PsiOptions::instance()->setOption("options.ui.notifications.sounds.new-chat", d->le_oeChat1->text());
@@ -171,11 +171,11 @@ void OptionsTabSound::restoreOptions()
 #elif defined(Q_OS_MAC)
 	d->le_player->setText(tr("Mac OS Sound"));
 #else
-	d->le_player->setText( PsiOptions::instance()->getOption("options.ui.notifications.sounds.unix-sound-player").toString() );
+//	d->le_player->setText( PsiOptions::instance()->getOption("options.ui.notifications.sounds.unix-sound-player").toString() );
 #endif
 
 	d->ck_awaySound->setChecked( !PsiOptions::instance()->getOption("options.ui.notifications.sounds.silent-while-away").toBool() );
-	d->ck_gcSound->setChecked( PsiOptions::instance()->getOption("options.ui.notifications.sounds.notify-every-muc-message").toBool() );
+//	d->ck_gcSound->setChecked( PsiOptions::instance()->getOption("options.ui.notifications.sounds.notify-every-muc-message").toBool() );
 
 	d->le_oeMessage->setText(PsiOptions::instance()->getOption("options.ui.notifications.sounds.incoming-message").toString());
 	d->le_oeChat1->setText(PsiOptions::instance()->getOption("options.ui.notifications.sounds.new-chat").toString());
