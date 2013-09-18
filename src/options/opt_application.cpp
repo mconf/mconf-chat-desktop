@@ -67,18 +67,15 @@ QWidget *OptionsTabApplication::widget()
 	d->gb_docklet->hide();
 #endif
 
-	if (!haveAutoUpdater_) {
-		d->ck_autoUpdate->hide();
-	}
+//	if (!haveAutoUpdater_) {
+//		d->ck_autoUpdate->hide();
+//	}
 
 	//Proxy
 
 	ProxyChooser *pc = ProxyManager::instance()->createProxyChooser(w);
 	d->gb_proxy->layout()->addWidget(ProxyManager::instance()->proxyForObject()->getComboBox(pc, w));
 	d->gb_proxy->layout()->addWidget(pc);
-
-
-	connect(d->le_dtPort, SIGNAL(textChanged(QString)), this, SLOT(updatePortLabel()));
 
 	return w;
 }
@@ -101,17 +98,13 @@ void OptionsTabApplication::applyOptions()
 	PsiOptions::instance()->setOption("options.ui.contactlist.show-menubar", d->ck_showMenubar->isChecked());
 
 	// Auto-update
-	PsiOptions::instance()->setOption("options.auto-update.check-on-startup", d->ck_autoUpdate->isChecked());
+//	PsiOptions::instance()->setOption("options.auto-update.check-on-startup", d->ck_autoUpdate->isChecked());
 	
 	// docklet
 	PsiOptions::instance()->setOption("options.ui.systemtray.enable", d->ck_docklet->isChecked());
 	PsiOptions::instance()->setOption("options.ui.systemtray.use-double-click", d->ck_dockDCstyle->isChecked());
 	PsiOptions::instance()->setOption("options.contactlist.hide-on-start", d->ck_dockHideMW->isChecked());
 	PsiOptions::instance()->setOption("options.contactlist.use-toolwindow", d->ck_dockToolMW->isChecked());
-
-	// data transfer
-	PsiOptions::instance()->setOption("options.p2p.bytestreams.listen-port", d->le_dtPort->text().toInt());
-	PsiOptions::instance()->setOption("options.p2p.bytestreams.external-address", d->le_dtExternal->text().trimmed());
 
 	//Proxy
 	ProxyManager::instance()->proxyForObject()->save();
@@ -129,41 +122,11 @@ void OptionsTabApplication::restoreOptions()
 	d->ck_showMenubar->setChecked( PsiOptions::instance()->getOption("options.ui.contactlist.show-menubar").toBool() );
 	d->ck_useleft->setChecked( PsiOptions::instance()->getOption("options.ui.contactlist.use-left-click").toBool() );
 	d->ck_useleft->setVisible(false); //currently useless
-	d->ck_autoUpdate->setChecked(PsiOptions::instance()->getOption("options.auto-update.check-on-startup").toBool());
+//	d->ck_autoUpdate->setChecked(PsiOptions::instance()->getOption("options.auto-update.check-on-startup").toBool());
 
 	// docklet
 	d->ck_docklet->setChecked( PsiOptions::instance()->getOption("options.ui.systemtray.enable").toBool() );
 	d->ck_dockDCstyle->setChecked( PsiOptions::instance()->getOption("options.ui.systemtray.use-double-click").toBool() );
 	d->ck_dockHideMW->setChecked( PsiOptions::instance()->getOption("options.contactlist.hide-on-start").toBool() );
 	d->ck_dockToolMW->setChecked( PsiOptions::instance()->getOption("options.contactlist.use-toolwindow").toBool() );
-
-	// data transfer
-	d->le_dtPort->setText( QString::number(PsiOptions::instance()->getOption("options.p2p.bytestreams.listen-port").toInt()) );
-	d->le_dtExternal->setText( PsiOptions::instance()->getOption("options.p2p.bytestreams.external-address").toString() );
-}
-
-void OptionsTabApplication::updatePortLabel()
-{
-	if ( !w )
-		return;
-
-	OptApplicationUI *d = (OptApplicationUI *)w;
-
-	if ( d->le_dtPort->text().isEmpty() ) {
-		d->label->clear();
-		return;
-	}
-
-	int port = d->le_dtPort->text().toInt();
-	if ( port < 0 || port > 65532 ) {
-		d->label->clear();
-		return;
-	}
-
-	if ( port == 0 ) {
-		d->label->setText(tr("(TCP: Disabled, UDP: Auto)"));
-	}
-	else {
-		d->label->setText(tr("(TCP: %1, UDP: %1-%2)").arg( port ).arg( port + 3 ));
-	}
 }
