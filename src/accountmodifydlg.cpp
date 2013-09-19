@@ -80,13 +80,10 @@ void AccountModifyDlg::init()
 	lb_security_level->hide();
 
 	connect(ck_host, SIGNAL(toggled(bool)), SLOT(hostToggled(bool)));
-	connect(pb_key, SIGNAL(clicked()), SLOT(chooseKey()));
-	connect(pb_keyclear, SIGNAL(clicked()), SLOT(clearKey()));
 	connect(buttonBox->button(QDialogButtonBox::Save), SIGNAL(clicked()), SLOT(save()));
 	connect(ck_automatic_resource, SIGNAL(toggled(bool)), le_resource, SLOT(setDisabled(bool)));
 	connect(ck_automatic_resource, SIGNAL(toggled(bool)), lb_resource, SLOT(setDisabled(bool)));
 
-	gb_pgp->setEnabled(false);
 
 	if (pa) {
 		connect(pb_vcard, SIGNAL(clicked()), SLOT(detailsVCard()));
@@ -149,11 +146,7 @@ void AccountModifyDlg::init()
 	ibbOnlyToggled(acc.ibbOnly);
 
 	key = acc.pgpSecretKey;
-	updateUserID();
 	PGPUtil::instance().clearPGPAvailableCache();
-	if(PGPUtil::instance().pgpAvailable()) {
-		gb_pgp->setEnabled(true);
-	}
 
 	pc = ProxyManager::instance()->createProxyChooser(tab_connection);
 	replaceWidget(lb_proxychooser, pc);
@@ -270,10 +263,6 @@ void AccountModifyDlg::init()
 		lb_jid->setText(tr("Username:"));
 	}
 
-	if (!PsiOptions::instance()->getOption("options.pgp.enable").toBool()) {
-		gb_pgp->hide();
-	}
-
 	if (!PsiOptions::instance()->getOption("options.ui.account.privacy.show").toBool())
 		tab_main->removeTab(tab_main->indexOf(tab_privacy));
 
@@ -340,33 +329,6 @@ AccountModifyDlg::~AccountModifyDlg()
 {
 	if (pa)
 		pa->dialogUnregister(this);
-}
-
-void AccountModifyDlg::updateUserID()
-{
-	if(key.isNull()) {
-		setKeyID(false);
-	}
-	else {
-		setKeyID(true, key.primaryUserId());
-	}
-}
-
-void AccountModifyDlg::setKeyID(bool b, const QString &s)
-{
-	if(b) {
-		lb_keyname->setText(s);
-		lb_keyname->setMinimumWidth(100);
-		lb_keyicon->setEnabled(true);
-		lb_keyname->setEnabled(true);
-		pb_keyclear->setEnabled(true);
-	}
-	else {
-		lb_keyname->setText(tr("No Key Selected"));
-		lb_keyicon->setEnabled(false);
-		lb_keyname->setEnabled(false);
-		pb_keyclear->setEnabled(false);
-	}
 }
 
 //void AccountModifyDlg::pgpToggled(bool b)
@@ -436,13 +398,11 @@ void AccountModifyDlg::chooseKey()
 
 	if(!entry.isNull()) {
 		key = entry.pgpSecretKey();
-		updateUserID();
 	}
 }
 
 void AccountModifyDlg::clearKey()
 {
-	setKeyID(false);
 	key = QCA::PGPKey();
 }
 

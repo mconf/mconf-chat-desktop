@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>455</height>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_account">
       <attribute name="title">
@@ -207,7 +207,7 @@
              <bool>false</bool>
             </property>
             <property name="visible">
-               <bool>false</bool>
+             <bool>false</bool>
             </property>
             <property name="text">
              <string>Log message history</string>
@@ -327,114 +327,6 @@
              <widget class="QPushButton" name="pb_vcard">
               <property name="text">
                <string>Edit Personal &amp;Details...</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gb_pgp">
-         <property name="title">
-          <string>OpenPGP</string>
-         </property>
-         <layout class="QVBoxLayout">
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <property name="leftMargin">
-           <number>10</number>
-          </property>
-          <property name="topMargin">
-           <number>10</number>
-          </property>
-          <property name="rightMargin">
-           <number>10</number>
-          </property>
-          <property name="bottomMargin">
-           <number>10</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout">
-            <property name="spacing">
-             <number>6</number>
-            </property>
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="IconLabel" name="lb_keyicon" native="true"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="lb_keyname">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>placeholder2</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout">
-            <property name="spacing">
-             <number>6</number>
-            </property>
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <spacer>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pb_key">
-              <property name="text">
-               <string>Select &amp;Key...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pb_keyclear">
-              <property name="text">
-               <string>Use None</string>
               </property>
              </widget>
             </item>
@@ -1317,14 +1209,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>IconLabel</class>
-   <extends></extends>
-   <header>iconlabel.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>le_name</tabstop>
   <tabstop>tab_main</tabstop>
@@ -1336,8 +1220,6 @@
   <tabstop>ck_reconn</tabstop>
   <tabstop>ck_log</tabstop>
   <tabstop>pb_vcard</tabstop>
-  <tabstop>pb_key</tabstop>
-  <tabstop>pb_keyclear</tabstop>
   <tabstop>lv_blocked</tabstop>
   <tabstop>pb_addBlock</tabstop>
   <tabstop>pb_removeBlock</tabstop>
