@@ -221,7 +221,7 @@ QWidget *OptionsTabAppearanceGeneral::widget()
 		{d->ck_cOnline,  d->pb_cOnline,  "contactlist.status.online", s.arg(tr("online")) },
 		{d->ck_cOffline, d->pb_cOffline, "contactlist.status.offline", s.arg(tr("offline")) },
 		{d->ck_cAway,    d->pb_cAway,    "contactlist.status.away", s.arg(tr("away")) },
-		{d->ck_cDND,     d->pb_cDND,     "contactlist.status.do-not-disturb", s.arg(tr("do not disturb")) },
+        {d->ck_cDND,     d->pb_cDND,     "contactlist.status.do-not-disturb", s.arg(tr("busy")) },
 		{d->ck_cStatus,  d->pb_cStatus,  "contactlist.status-messages", s.arg(tr("Status message"))},
 		{d->ck_cProfileFore,     d->pb_cProfileFore, "contactlist.profile.header-foreground", ""},
 		{d->ck_cProfileBack,     d->pb_cProfileBack, "contactlist.profile.header-background", ""},

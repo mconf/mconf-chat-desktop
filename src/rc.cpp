@@ -84,7 +84,7 @@ AHCommand RCSetStatusServer::execute(const AHCommand& c, const Jid&)
 			status_options += xa_option;
 		}
 		XData::Field::Option dnd_option;
-		dnd_option.label = QObject::tr("Do Not Disturb");
+        dnd_option.label = QObject::tr("Busy");
 		dnd_option.value = "dnd";
 		status_options += dnd_option;
 		if (PsiOptions::instance()->getOption("options.ui.menu.status.invisible").toBool()) {
