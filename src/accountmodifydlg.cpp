@@ -74,6 +74,11 @@ void AccountModifyDlg::init()
 	le_port->setEnabled(false);
 	lb_port->setEnabled(false);
 
+    //removing some unused tabs to mconf project
+    tab_main->removeTab(tab_main->indexOf(tab_misc));
+    tab_main->removeTab(tab_main->indexOf(tab_connection));
+    tab_main->removeTab(tab_main->indexOf(tab_details));
+
 	// FIXME: Temporarily removing security level settings
 	ck_req_mutual->hide();
 	cb_security_level->hide();
