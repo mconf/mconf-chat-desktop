@@ -363,7 +363,7 @@ void PsiActionList::Private::createMainWin()
 
 		ActionNames actions[] = {
 			{ "help_readme",           actReadme          },
-			{ "help_tip",              actTip             },
+//			{ "help_tip",              actTip             },
 			{ "help_online_help",      actOnlineHelp      },
 			{ "help_online_wiki",      actOnlineWiki      },
 			{ "help_online_home",      actOnlineHome      },
