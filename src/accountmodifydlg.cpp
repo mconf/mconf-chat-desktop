@@ -333,6 +333,9 @@ void AccountModifyDlg::init()
 		tab_main->removeTab(tab_main->indexOf(tab_misc));
 	}
 
+//    hide log capabilities. for now...
+    ck_log->hide();
+
 	resize(minimumSizeHint());
 }
 
