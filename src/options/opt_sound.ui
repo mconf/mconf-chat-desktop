@@ -36,14 +36,14 @@
         <string>Player:</string>
        </property>
        <property name="visible" >
-        <string>false</string>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLineEdit" name="le_player" >
       <property name="visible" >
-       <string>false</string>
+       <bool>false</bool>
       </property>
       </widget>
      </item>
@@ -62,7 +62,7 @@
       <string>Play sounds for all messages in groupchat</string>
      </property>
      <property name="visible" >
-      <string>false</string>
+      <bool>false</bool>
      </property>
     </widget>
    </item>
