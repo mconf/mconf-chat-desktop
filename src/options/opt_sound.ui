@@ -35,10 +35,17 @@
        <property name="text" >
         <string>Player:</string>
        </property>
+       <property name="visible" >
+        <string>false</string>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="le_player" />
+      <widget class="QLineEdit" name="le_player" >
+      <property name="visible" >
+       <string>false</string>
+      </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -53,6 +60,9 @@
     <widget class="QCheckBox" name="ck_gcSound" >
      <property name="text" >
       <string>Play sounds for all messages in groupchat</string>
+     </property>
+     <property name="visible" >
+      <string>false</string>
      </property>
     </widget>
    </item>
