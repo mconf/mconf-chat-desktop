@@ -412,7 +412,7 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon* psi)
 	QMenu* helpMenu = new QMenu(tr("Help"), this);
 	mainMenuBar()->addMenu(helpMenu);
 	d->getAction("help_readme")->addTo (helpMenu);
-	d->getAction("help_tip")->addTo (helpMenu);
+    d->getAction("help_tip")->addTo (helpMenu);
 	helpMenu->addSeparator();
 	d->getAction("help_online_help")->addTo (helpMenu);
 	d->getAction("help_online_wiki")->addTo (helpMenu);
@@ -758,7 +758,7 @@ void MainWin::buildOptionsMenu()
 
 	QStringList actions;
 	actions << "help_readme"
-			<< "help_tip"
+//			<< "help_tip"
 			<< "separator"
             //<< "help_online_help"
             //<< "help_online_wiki"
