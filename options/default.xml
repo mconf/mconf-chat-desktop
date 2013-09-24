@@ -77,7 +77,7 @@
 				<security comment="Options related to the seciruty UI">
 					<show comment="Show the security UI" type="bool">true</show>
 				</security>
-				<single comment="Limit the client to a single account" type="bool">false</single>
+                                <single comment="Limit the client to a single account" type="bool">true</single>
 			</account>
 			<message comment="Message options">
 				<enabled comment="Enable message (i.e. non-chat) functionality" type="bool">true</enabled>
