@@ -276,15 +276,17 @@ void OptionsDlg::Private::createTabs()
 	//tabs.append( new OptionsTabIconsetSystem(this) );
 	//tabs.append( new OptionsTabIconsetRoster(this) );
 	//tabs.append( new OptionsTabIconsetEmoticons(this) );
-//	tabs.append( new OptionsTabGroupchat(this) );
 	tabs.append( new OptionsTabSound(this) );
     if(AvCallManager::isSupported())
 		tabs.append( new OptionsTabAvCall(this) );
-//	tabs.append( new OptionsTabToolbars(this) );
 #ifdef PSI_PLUGINS
 	tabs.append( new OptionsTabPlugins(this) );
 #endif
 	tabs.append( new OptionsTabShortcuts(this) );
+
+    //  mconf client does not need these menus
+//	tabs.append( new OptionsTabGroupchat(this) );
+//	tabs.append( new OptionsTabToolbars(this) );
 //	tabs.append( new OptionsTabAdvanced(this) );
 //	tabs.append( new OptionsTabTree(this) );
 
