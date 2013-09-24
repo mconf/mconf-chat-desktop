@@ -332,7 +332,11 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QLineEdit" name="le_meeting"/>
+           <widget class="QLineEdit" name="le_meeting">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
