@@ -653,7 +653,7 @@ void MainWin::setUseDock(bool use)
 void MainWin::buildStatusMenu()
 {
 	d->statusMenu->clear();
-	d->getAction("status_online")->addTo(d->statusMenu);
+    d->getAction("status_online")->addTo(d->statusMenu);
 	if (PsiOptions::instance()->getOption("options.ui.menu.status.chat").toBool()) {
 		d->getAction("status_chat")->addTo(d->statusMenu);
 	}
@@ -808,7 +808,8 @@ void MainWin::buildToolsMenu()
 	QStringList actions;
 	actions << "menu_file_transfer"
 			<< "separator"
-			<< "menu_xml_console";
+//			<< "menu_xml_console"
+            ;
 
 	d->updateMenu(actions, d->toolsMenu);
 }
@@ -827,7 +828,8 @@ void MainWin::buildGeneralMenu(QMenu* menu)
 #endif
 			<< "menu_account_setup"
 			<< "menu_options"
-			<< "menu_file_transfer";
+//			<< "menu_file_transfer"
+               ;
 	if (PsiOptions::instance()->getOption("options.ui.menu.main.change-profile").toBool()) {
 		actions << "menu_change_profile";
 	}
