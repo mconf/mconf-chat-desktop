@@ -152,6 +152,9 @@
               <property name="text">
                <string>Change...</string>
               </property>
+              <property name="visible">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
            </layout>
