@@ -198,6 +198,8 @@ void UserAccount::fromOptions(OptionsTree *o, QString base)
 	name = o->getOption(base + ".name").toString();
 	jid = o->getOption(base + ".jid").toString();
 
+    meeting = o->getOption(base + ".meeting").toString();
+
 	customAuth = o->getOption(base + ".custom-auth.use").toBool();
 	authid = o->getOption(base + ".custom-auth.authid").toString();
 	realm = o->getOption(base + ".custom-auth.realm").toString();
@@ -329,6 +331,8 @@ void UserAccount::toOptions(OptionsTree *o, QString base)
 	o->setOption(base + ".name", name);
 	o->setOption(base + ".jid", jid);
 
+    o->setOption(base + ".meeting", meeting);
+
 	o->setOption(base + ".custom-auth.use", customAuth);
 	o->setOption(base + ".custom-auth.authid", authid);
 	o->setOption(base + ".custom-auth.realm", realm);
@@ -445,6 +449,7 @@ void UserAccount::fromXml(const QDomElement &a)
 
 	readEntry(a, "id", &id);
 	readEntry(a, "name", &name);
+    readEntry(a, "meeting", &meeting);
 	readBoolAttribute(a, "enabled", &opt_enabled);
 	readBoolAttribute(a, "auto", &opt_auto);
 	readBoolAttribute(a, "showOffline", &tog_offline);

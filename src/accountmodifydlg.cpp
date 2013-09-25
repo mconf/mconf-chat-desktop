@@ -97,6 +97,8 @@ void AccountModifyDlg::init()
 		pb_changepw->setEnabled(false);
 	}
 
+    le_meeting->setText(acc.meeting);
+
 	// Hide the name if necessary
 	le_name->setText(acc.name);
 	le_jid->setText(JIDUtil::accountToString(acc.jid,false));
@@ -533,6 +535,8 @@ void AccountModifyDlg::save()
 	acc.stunPass = le_stunPass->text();
 
 	acc.pgpSecretKey = key;
+
+    acc.meeting = le_meeting->text().trimmed();
 
 	acc.proxyID = pc->currentItem();
 

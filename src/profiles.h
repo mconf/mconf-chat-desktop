@@ -53,6 +53,7 @@ public:
 	QString id;
 	QString name;
 	QString jid, pass, host, resource, authid, realm;
+    QString meeting;
 	bool customAuth;
 	int port, priority;
  	bool opt_enabled, opt_pass, opt_host, opt_auto, opt_keepAlive, opt_log, opt_connectAfterSleep, opt_reconn, opt_ignoreSSLWarnings, opt_compress;

@@ -149,11 +149,11 @@
             </item>
             <item>
              <widget class="QPushButton" name="pb_changepw">
-              <property name="text">
-               <string>Change...</string>
-              </property>
               <property name="visible">
                <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Change...</string>
               </property>
              </widget>
             </item>
@@ -337,7 +337,7 @@
           <item>
            <widget class="QLineEdit" name="le_meeting">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>
