@@ -39,6 +39,8 @@ private slots:
 	// reimplemented
 	void chatEditCreated();
 
+    void on_pb_invite_clicked();
+
 private:
 	void initToolBar();
 	void initToolButtons();
@@ -66,6 +68,8 @@ private:
 
 private:
 	Ui::ChatDlg ui_;
+
+    PsiAccount* psiAccount;
 
 	QMenu* pm_settings_;
 

@@ -169,6 +169,7 @@ PsiChatDlg::PsiChatDlg(const Jid& jid, PsiAccount* pa, TabManager* tabManager)
 {
 	connect(account()->psi(), SIGNAL(accountCountChanged()), this, SLOT(updateIdentityVisibility()));
 	mCmdManager_.registerProvider(new ChatDlgMCmdProvider(this));
+    psiAccount = pa;
 }
 
 void PsiChatDlg::initUi()
@@ -678,8 +679,22 @@ bool PsiChatDlg::eventFilter( QObject *obj, QEvent *ev ) {
 		tabCompletion.reset();
 	}
 
-	return ChatDlg::eventFilter( obj, ev );
+    return ChatDlg::eventFilter( obj, ev );
 }
 
+void PsiChatDlg::on_pb_invite_clicked(){
+    //    TODO: store current data and retrive it later
+    QString meeting = "";
+    meeting = psiAccount->accountOptions().meeting;
+    if (!meeting.isEmpty()){
+        chatEdit()->setText(meeting);
+        ChatDlg::doSend();
+    }
+    else{
+        QWidget* popupWidget = new QWidget();
+        popupWidget->setWindowFlags(Qt::Popup);
+    }
+}
 
 #include "psichatdlg.moc"
+
