@@ -4,7 +4,7 @@
 
 # Configuration
 TEMPLATE = app
-TARGET   = psi
+TARGET   = mconf-chat
 CONFIG  += qt thread x11
 DESTDIR  = $$PWD/..
 
