@@ -17,6 +17,7 @@
 	<options comment="Client options">
 		<account comment="Default account options">
 			<domain comment="Always use the same domain to register with. Leave this empty to allow the user to choose his server." type="QString">red-clara-chat.inf.ufrgs.br</domain>
+			<discover-token comment="URL used by the user to discover his access token." type="QString">http://www.redclara.net/</discover-token>
 		</account>
     <auto-update comment="Auto updater">
       <check-on-startup comment="Check for available updates on startup" type="bool">true</check-on-startup>

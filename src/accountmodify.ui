@@ -100,7 +100,7 @@
             <item>
              <widget class="QLabel" name="textLabel1">
               <property name="text">
-               <string>Password:</string>
+               <string>Token:</string>
               </property>
              </widget>
             </item>
@@ -118,6 +118,20 @@
               </property>
               <property name="text">
                <string>Change...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="lb_discover_token">
+              <property name="text">
+               <string>Click here to discover your access token</string>
+              </property>
+              <property name="openExternalLinks">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
