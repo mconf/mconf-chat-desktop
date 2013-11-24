@@ -495,17 +495,17 @@ void MainWin::registerAction( IconAction* action )
 
 		{ "button_options", activated, this, SIGNAL( doOptions() ) },
 
-		{ "menu_disco",       SIGNAL( activated(PsiAccount *, int) ), this, SLOT( activatedAccOption(PsiAccount*, int) ) },
+//		{ "menu_disco",       SIGNAL( activated(PsiAccount *, int) ), this, SLOT( activatedAccOption(PsiAccount*, int) ) },
 		{ "menu_add_contact", SIGNAL( activated(PsiAccount *, int) ), this, SLOT( activatedAccOption(PsiAccount*, int) ) },
-		{ "menu_xml_console", SIGNAL( activated(PsiAccount *, int) ), this, SLOT( activatedAccOption(PsiAccount*, int) ) },
+//		{ "menu_xml_console", SIGNAL( activated(PsiAccount *, int) ), this, SLOT( activatedAccOption(PsiAccount*, int) ) },
 
-		{ "menu_new_message",    activated, this, SIGNAL( blankMessage() ) },
+//		{ "menu_new_message",    activated, this, SIGNAL( blankMessage() ) },
 #ifdef GROUPCHAT
-		{ "menu_join_groupchat", activated, this, SIGNAL( doGroupChat() ) },
+//		{ "menu_join_groupchat", activated, this, SIGNAL( doGroupChat() ) },
 #endif
 		{ "menu_account_setup",  activated, this, SIGNAL( doManageAccounts() ) },
 		{ "menu_options",        activated, this, SIGNAL( doOptions() ) },
-		{ "menu_file_transfer",  activated, this, SIGNAL( doFileTransDlg() ) },
+//		{ "menu_file_transfer",  activated, this, SIGNAL( doFileTransDlg() ) },
 		{ "menu_toolbars",       activated, this, SIGNAL( doToolbars() ) },
 		{ "menu_change_profile", activated, this, SIGNAL( changeProfile() ) },
 		{ "menu_quit",           activated, this, SLOT( try2tryCloseProgram() ) },
@@ -786,6 +786,7 @@ void MainWin::buildMainMenu()
 	// main menu
 	QStringList actions;
 	actions << "menu_add_contact";
+/*
 	if (PsiOptions::instance()->getOption("options.ui.message.enabled").toBool()) {
 		actions << "menu_new_message";
 	}
@@ -794,7 +795,8 @@ void MainWin::buildMainMenu()
 			<< "menu_join_groupchat"
 #endif
 			<< "separator"
-			<< "menu_account_setup";
+*/
+	actions << "menu_account_setup";
 	if (PsiOptions::instance()->getOption("options.ui.menu.main.change-profile").toBool()) {
 		actions << "menu_change_profile";
 	}
@@ -806,10 +808,11 @@ void MainWin::buildMainMenu()
 void MainWin::buildToolsMenu()
 {
 	QStringList actions;
+/*
 	actions << "menu_file_transfer"
 			<< "separator"
-//			<< "menu_xml_console"
-            ;
+			<< "menu_xml_console";
+*/
 
 	d->updateMenu(actions, d->toolsMenu);
 }
@@ -819,6 +822,7 @@ void MainWin::buildGeneralMenu(QMenu* menu)
 	// options menu
 	QStringList actions;
 	actions << "menu_add_contact";
+/*
 	if (PsiOptions::instance()->getOption("options.ui.message.enabled").toBool()) {
 		actions << "menu_new_message";
 	}
@@ -826,7 +830,8 @@ void MainWin::buildGeneralMenu(QMenu* menu)
 #ifdef GROUPCHAT
 			<< "menu_join_groupchat"
 #endif
-			<< "menu_account_setup"
+*/
+	actions << "menu_account_setup"
 			<< "menu_options"
 //			<< "menu_file_transfer"
                ;
@@ -987,9 +992,9 @@ void MainWin::activatedAccOption(PsiAccount* pa, int x)
 	else if(x == 2) {
 		pa->showXmlConsole();
 	}
-	else if(x == 3) {
-		pa->doDisco();
-	}
+//	else if(x == 3) {
+//		pa->doDisco();
+//	}
 }
 
 void MainWin::buildTrayMenu()

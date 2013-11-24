@@ -314,8 +314,8 @@ void PsiChatDlg::initToolButtons()
 	connect(act_voice_, SIGNAL(triggered()), SLOT(doVoice()));
 	act_voice_->setEnabled(false);
 
-	act_file_ = new IconAction(tr("Send File"), "psi/upload", tr("Send File"), 0, this);
-	connect(act_file_, SIGNAL(triggered()), SLOT(doFile()));
+//	act_file_ = new IconAction(tr("Send File"), "psi/upload", tr("Send File"), 0, this);
+//	connect(act_file_, SIGNAL(triggered()), SLOT(doFile()));
 
 	act_pgp_ = new IconAction(tr("Toggle Encryption"), "", tr("Toggle Encryption"), 0, this, 0, true);
 	ui_.tb_pgp->setDefaultAction(act_pgp_);
@@ -337,7 +337,7 @@ void PsiChatDlg::initToolBar()
 	ui_.toolbar->addAction(act_clear_);
 	ui_.toolbar->addWidget(new StretchWidget(ui_.toolbar));
 	ui_.toolbar->addAction(act_icon_);
-	ui_.toolbar->addAction(act_file_);
+//	ui_.toolbar->addAction(act_file_);
 	if (PsiOptions::instance()->getOption("options.pgp.enable").toBool()) {
 		ui_.toolbar->addAction(act_pgp_);
 	}
@@ -512,7 +512,7 @@ void PsiChatDlg::buildMenu()
 	pm_settings_->addSeparator();
 
 	pm_settings_->addAction(act_icon_);
-	pm_settings_->addAction(act_file_);
+//	pm_settings_->addAction(act_file_);
 	if (account()->voiceCaller())
 		act_voice_->addTo(pm_settings_);
 	pm_settings_->addAction(act_pgp_);

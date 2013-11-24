@@ -173,7 +173,7 @@ InfoDlg::InfoDlg(int type, const Jid &j, const VCard &vcard, PsiAccount *pa, QWi
 	connect(ui_.pb_clear, SIGNAL(clicked()), this, SLOT(clearPhoto()));
 	connect(ui_.pb_close, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui_.tb_photo, SIGNAL(clicked()), SLOT(showPhoto()));
-	connect(ui_.pb_disco, SIGNAL(clicked()), this, SLOT(doDisco()));
+//	connect(ui_.pb_disco, SIGNAL(clicked()), this, SLOT(doDisco()));
 	//connect(editnames, SIGNAL(triggered()), d->namesDlg, SLOT(show()));
 
 	if(d->type == Self) {
@@ -207,7 +207,7 @@ InfoDlg::InfoDlg(int type, const Jid &j, const VCard &vcard, PsiAccount *pa, QWi
 		connect(d->calendar, SIGNAL(activated(QDate)), this, SLOT(doUpdateFromCalendar(QDate)));
 		connect(d->noBdayButton, SIGNAL(clicked()), SLOT(doClearBirthDate()));
 
-		ui_.pb_disco->hide();
+//		ui_.pb_disco->hide();
 	}
 	else {
 		// Hide buttons

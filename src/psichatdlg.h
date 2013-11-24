@@ -78,7 +78,7 @@ private:
 	IconAction* act_info_;
 	IconAction* act_pgp_;
 	IconAction* act_icon_;
-	IconAction* act_file_;
+//	IconAction* act_file_;
 	IconAction* act_compact_;
 	IconAction* act_voice_;
 

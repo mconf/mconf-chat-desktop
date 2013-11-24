@@ -16,7 +16,7 @@
 <psi version="defaults">
 	<options comment="Client options">
 		<account comment="Default account options">
-                        <domain comment="Always use the same domain to register with. Leave this empty to allow the user to choose his server." type="QString">mconf-chat-test.inf.ufrgs.br</domain>
+			<domain comment="Always use the same domain to register with. Leave this empty to allow the user to choose his server." type="QString">red-clara-chat.inf.ufrgs.br</domain>
 		</account>
     <auto-update comment="Auto updater">
       <check-on-startup comment="Check for available updates on startup" type="bool">true</check-on-startup>

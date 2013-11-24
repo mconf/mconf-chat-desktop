@@ -38,8 +38,8 @@
 //
 // PROG_SNAME - read as small name, system name, soname, short name, fs name
 
-#define PROG_NAME "Mconf"
-#define PROG_SNAME "mconf"
+#define PROG_NAME "Mconf-Chat"
+#define PROG_SNAME "mconf-chat"
 #define PROG_VERSION PSI_VERSION
 //#define PROG_VERSION "0.15-dev" " (" __DATE__ ")" //CVS Builds are dated
 //#define PROG_VERSION "0.15";

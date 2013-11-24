@@ -74,6 +74,12 @@ void AccountModifyDlg::init()
 	le_port->setEnabled(false);
 	lb_port->setEnabled(false);
 
+	if (PsiOptions::instance()->getOption("options.account.discover-token").toString().isEmpty()) {
+		lb_discover_token->setVisible(false);
+	} else {
+		lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "\">" + lb_discover_token->text() + "</a>");
+	}
+
 	// FIXME: Temporarily removing security level settings
 	ck_req_mutual->hide();
 	cb_security_level->hide();

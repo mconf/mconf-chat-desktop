@@ -2,7 +2,7 @@
 # This is the spec version, *not* the application version
 Version=1.0
 Type=Application
-Name=Mconf
+Name=Mconf-Chat
 GenericName=XMPP Client
 Comment=Communicate over the XMPP network
 Icon=mconf

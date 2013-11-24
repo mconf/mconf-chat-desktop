@@ -220,17 +220,17 @@ public:
 #else
 	QAction* addAuthAction_;
 	QAction* receiveIncomingEventAction_;
-	QAction* sendMessageAction_;
-	QMenu* sendMessageToMenu_;
+//	QAction* sendMessageAction_;
+//	QMenu* sendMessageToMenu_;
 	QAction* openChatAction_;
 	QMenu* openChatToMenu_;
 	QAction* openWhiteboardAction_;
 	QMenu* openWhiteboardToMenu_;
-	ResourceMenu* executeCommandMenu_;
+//	ResourceMenu* executeCommandMenu_;
 	ResourceMenu* activeChatsMenu_;
 	QAction* voiceCallAction_;
-	QAction* sendFileAction_;
-	InviteToGroupChatMenu* inviteToGroupchatMenu_;
+//	QAction* sendFileAction_;
+//	InviteToGroupChatMenu* inviteToGroupchatMenu_;
 	GroupMenu* groupMenu_;
 	QAction* transportLogonAction_;
 	QAction* transportLogoffAction_;
@@ -316,9 +316,9 @@ public:
 		connect(receiveIncomingEventAction_, SIGNAL(triggered()), SLOT(receiveIncomingEvent()));
 		receiveIncomingEventAction_->setShortcuts(ShortcutManager::instance()->shortcuts("contactlist.event"));
 
-		sendMessageAction_ = new IconAction(tr("Send &Message"), this, "psi/sendMessage");
-		connect(sendMessageAction_, SIGNAL(triggered()), SLOT(sendMessage()));
-		sendMessageAction_->setShortcuts(ShortcutManager::instance()->shortcuts("contactlist.message"));
+//		sendMessageAction_ = new IconAction(tr("Send &Message"), this, "psi/sendMessage");
+//		connect(sendMessageAction_, SIGNAL(triggered()), SLOT(sendMessage()));
+//		sendMessageAction_->setShortcuts(ShortcutManager::instance()->shortcuts("contactlist.message"));
 
 		openChatAction_ = new IconAction(tr("Open &Chat Window"), this, "psi/start-chat");
 		connect(openChatAction_, SIGNAL(triggered()), SLOT(openChat()));
@@ -330,8 +330,8 @@ public:
 		voiceCallAction_ = new IconAction(tr("Voice Call"), this, "psi/voice");
 		connect(voiceCallAction_, SIGNAL(triggered()), SLOT(voiceCall()));
 
-		sendFileAction_ = new IconAction(tr("Send &File"), this, "psi/upload");
-		connect(sendFileAction_, SIGNAL(triggered()), SLOT(sendFile()));
+//		sendFileAction_ = new IconAction(tr("Send &File"), this, "psi/upload");
+//		connect(sendFileAction_, SIGNAL(triggered()), SLOT(sendFile()));
 
 		transportLogonAction_ = new IconAction(tr("&Log on"), this, "");
 		connect(transportLogonAction_, SIGNAL(triggered()), SLOT(transportLogon()));
@@ -371,16 +371,16 @@ public:
 		connect(historyAction_, SIGNAL(triggered()), SLOT(history()));
 		historyAction_->setShortcuts(ShortcutManager::instance()->shortcuts("common.history"));
 
-		inviteToGroupchatMenu_ = new InviteToGroupChatMenu(menu_);
-		inviteToGroupchatMenu_->setTitle(tr("Invite To"));
-		connect(inviteToGroupchatMenu_, SIGNAL(inviteToGroupchat(PsiAccount*, QString)), SLOT(inviteToGroupchat(PsiAccount*, QString)));
+//		inviteToGroupchatMenu_ = new InviteToGroupChatMenu(menu_);
+//		inviteToGroupchatMenu_->setTitle(tr("Invite To"));
+//		connect(inviteToGroupchatMenu_, SIGNAL(inviteToGroupchat(PsiAccount*, QString)), SLOT(inviteToGroupchat(PsiAccount*, QString)));
 
 		groupMenu_ = new GroupMenu(menu_);
 		groupMenu_->setTitle(tr("&Group"));
 		connect(groupMenu_, SIGNAL(groupActivated(QString)), SLOT(setContactGroup(QString)));
 
-		sendMessageToMenu_ = new ResourceMenu(tr("Send Message To"), contact_, menu_);
-		connect(sendMessageToMenu_, SIGNAL(resourceActivated(PsiContact*, const XMPP::Jid&)), SLOT(sendMessageTo(PsiContact*, const XMPP::Jid&)));
+//		sendMessageToMenu_ = new ResourceMenu(tr("Send Message To"), contact_, menu_);
+//		connect(sendMessageToMenu_, SIGNAL(resourceActivated(PsiContact*, const XMPP::Jid&)), SLOT(sendMessageTo(PsiContact*, const XMPP::Jid&)));
 
 		openChatToMenu_ = new ResourceMenu(tr("Open Chat To"), contact_, menu_);
 		connect(openChatToMenu_, SIGNAL(resourceActivated(PsiContact*, const XMPP::Jid&)), SLOT(openChatTo(PsiContact*, const XMPP::Jid&)));
@@ -388,8 +388,8 @@ public:
 		openWhiteboardToMenu_ = new ResourceMenu(tr("Open a Whiteboard To"), contact_, menu_);
 		connect(openWhiteboardToMenu_, SIGNAL(resourceActivated(PsiContact*, const XMPP::Jid&)), SLOT(openWhiteboardTo(PsiContact*, const XMPP::Jid&)));
 
-		executeCommandMenu_ = new ResourceMenu(tr("E&xecute Command"), contact_, menu_);
-		connect(executeCommandMenu_, SIGNAL(resourceActivated(PsiContact*, const XMPP::Jid&)), SLOT(executeCommand(PsiContact*, const XMPP::Jid&)));
+//		executeCommandMenu_ = new ResourceMenu(tr("E&xecute Command"), contact_, menu_);
+//		connect(executeCommandMenu_, SIGNAL(resourceActivated(PsiContact*, const XMPP::Jid&)), SLOT(executeCommand(PsiContact*, const XMPP::Jid&)));
 
 		activeChatsMenu_ = new ResourceMenu(tr("Active Chats"), contact_, menu_);
 		activeChatsMenu_->setActiveChatsMode(true);
@@ -399,19 +399,19 @@ public:
 		menu_->addSeparator();
 		menu_->addAction(receiveIncomingEventAction_);
 		menu_->addSeparator();
-		menu_->addAction(sendMessageAction_);
-		menu_->addMenu(sendMessageToMenu_);
+//		menu_->addAction(sendMessageAction_);
+//		menu_->addMenu(sendMessageToMenu_);
 		menu_->addAction(openChatAction_);
 		menu_->addMenu(openChatToMenu_);
 		menu_->addAction(openWhiteboardAction_);
 		menu_->addMenu(openWhiteboardToMenu_);
-		menu_->addMenu(executeCommandMenu_);
+//		menu_->addMenu(executeCommandMenu_);
 		menu_->addMenu(activeChatsMenu_);
 		menu_->addAction(voiceCallAction_);
 		menu_->addSeparator();
-		menu_->addAction(sendFileAction_);
-		menu_->addMenu(inviteToGroupchatMenu_);
-		menu_->addSeparator();
+//		menu_->addAction(sendFileAction_);
+//		menu_->addMenu(inviteToGroupchatMenu_);
+//		menu_->addSeparator();
 		menu_->addAction(renameAction_);
 		menu_->addMenu(groupMenu_);
 		menu_->addAction(transportLogonAction_);
@@ -468,36 +468,40 @@ private slots:
 		disableMoodNotificationsAction_->setChecked(!contact_->moodNotificationsEnabled());
 		disableMoodNotificationsAction_->setEnabled(PsiOptions::instance()->getOption("options.ya.popups.moods.enable").toBool());
 #else
-		inviteToGroupchatMenu_->updateMenu(contact_);
+//		inviteToGroupchatMenu_->updateMenu(contact_);
 		groupMenu_->updateMenu(contact_);
 
 		addAuthAction_->setVisible(!contact_->isSelf() && !contact_->inList() && !PsiOptions::instance()->getOption("options.ui.contactlist.lockdown-roster").toBool());
 		addAuthAction_->setEnabled(contact_->account()->isAvailable());
 		receiveIncomingEventAction_->setVisible(contact_->alerting());
+/*
 		if (!PsiOptions::instance()->getOption("options.ui.message.enabled").toBool()) {
 			sendMessageAction_->setVisible(false);
 			sendMessageToMenu_->menuAction()->setVisible(false);
 		}
 		sendMessageAction_->setEnabled(contact_->account()->isAvailable());
 		sendMessageToMenu_->setEnabled(!sendMessageToMenu_->isEmpty());
+*/
 		openChatToMenu_->setEnabled(!openChatToMenu_->isEmpty());
 		openWhiteboardToMenu_->setEnabled(!openWhiteboardToMenu_->isEmpty());
 #ifndef WHITEBOARDING
 		openWhiteboardAction_->setVisible(false);
 		openWhiteboardToMenu_->menuAction()->setVisible(false);
 #endif
+/*
 		if(contact_->account()->isAvailable()
 			&& executeCommandMenu_->isEmpty()
 			&& contact_->status().type() == Status::Offline )
 			executeCommandMenu_->addResource(XMPP::Status::Offline, "");
 		executeCommandMenu_->setEnabled(!executeCommandMenu_->isEmpty());
+*/
 		activeChatsMenu_->setEnabled(!activeChatsMenu_->isEmpty());
 		activeChatsMenu_->menuAction()->setVisible(PsiOptions::instance()->getOption("options.ui.menu.contact.active-chats").toBool());
 		voiceCallAction_->setVisible(contact_->account()->avCallManager() && !contact_->isAgent());
 		voiceCallAction_->setEnabled(contact_->account()->isAvailable());
-		sendFileAction_->setVisible(!contact_->isAgent());
-		sendFileAction_->setEnabled(contact_->account()->isAvailable());
-		inviteToGroupchatMenu_->setEnabled(!inviteToGroupchatMenu_->isEmpty() && contact_->account()->isAvailable());
+//		sendFileAction_->setVisible(!contact_->isAgent());
+//		sendFileAction_->setEnabled(contact_->account()->isAvailable());
+//		inviteToGroupchatMenu_->setEnabled(!inviteToGroupchatMenu_->isEmpty() && contact_->account()->isAvailable());
 		renameAction_->setVisible(!PsiOptions::instance()->getOption("options.ui.contactlist.lockdown-roster").toBool());
 		renameAction_->setEnabled(contact_->isEditable());
 		if (contact_->isAgent()) {
