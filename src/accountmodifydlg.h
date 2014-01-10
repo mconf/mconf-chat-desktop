@@ -70,6 +70,7 @@ private slots:
  	void addBlockClicked();
  	void removeBlockClicked();
  	void updateBlockedContacts(const PrivacyList&);
+    void generateToken();
  	void getDefaultList_error();
  	void changeList_error();
 

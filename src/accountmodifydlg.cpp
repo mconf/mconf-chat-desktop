@@ -76,9 +76,7 @@ void AccountModifyDlg::init()
 
 	if (PsiOptions::instance()->getOption("options.account.discover-token").toString().isEmpty()) {
 		lb_discover_token->setVisible(false);
-	} else {
-		lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "\">" + lb_discover_token->text() + "</a>");
-	}
+    }
 
 	// FIXME: Temporarily removing security level settings
 	ck_req_mutual->hide();
@@ -89,8 +87,10 @@ void AccountModifyDlg::init()
 	connect(pb_key, SIGNAL(clicked()), SLOT(chooseKey()));
 	connect(pb_keyclear, SIGNAL(clicked()), SLOT(clearKey()));
 	connect(buttonBox->button(QDialogButtonBox::Save), SIGNAL(clicked()), SLOT(save()));
+    connect(newTokenButton, SIGNAL(clicked()), SLOT(generateToken()));
 	connect(ck_automatic_resource, SIGNAL(toggled(bool)), le_resource, SLOT(setDisabled(bool)));
 	connect(ck_automatic_resource, SIGNAL(toggled(bool)), lb_resource, SLOT(setDisabled(bool)));
+
 
 	gb_pgp->setEnabled(false);
 
@@ -121,21 +121,29 @@ void AccountModifyDlg::init()
 	cb_plain->addItem(tr("Never"), ClientStream::NoAllowPlain);
 	cb_plain->setCurrentIndex(cb_plain->findData(acc.allow_plain));
 
-	if (acc.opt_pass)
-		le_pass->setText(acc.pass);
+    if (acc.opt_pass){
+        le_pass->setText(acc.pass);
+    }else{
+        int tokenLength = 8;
+        QCA::SecureArray randomBytes(tokenLength);
+        QString stringToken;
+        randomBytes=QCA::Random::randomArray(tokenLength);
+        stringToken = QCA::Hex().arrayToString(randomBytes).toAscii().data();
+        le_pass->setText(stringToken);
+    }
+
+    lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "token="+le_pass->text()+"\">" + lb_discover_token->text() + "</a>");
 
 	ck_host->setChecked(acc.opt_host);
 	le_host->setText(acc.host);
 	le_port->setText(QString::number(acc.port));
 	ck_req_mutual->setChecked(acc.req_mutual_auth);
-
-	ck_automatic_resource->setChecked(acc.opt_automatic_resource);
-	le_resource->setText(acc.resource);
-	le_priority->setText(QString::number(acc.priority));
-
+    ck_automatic_resource->setChecked(acc.opt_automatic_resource);
+    le_resource->setText(acc.resource);
+    le_priority->setText(QString::number(acc.priority));
 	connect(ck_custom_auth,SIGNAL(toggled(bool)), lb_authid, SLOT(setEnabled(bool)));
 	connect(ck_custom_auth,SIGNAL(toggled(bool)), le_authid, SLOT(setEnabled(bool)));
-	connect(ck_custom_auth,SIGNAL(toggled(bool)), lb_realm, SLOT(setEnabled(bool)));
+    connect(ck_custom_auth,SIGNAL(toggled(bool)), lb_realm, SLOT(setEnabled(bool)));
 	connect(ck_custom_auth,SIGNAL(toggled(bool)), le_realm, SLOT(setEnabled(bool)));
 	ck_custom_auth->setChecked(acc.customAuth);
 	le_authid->setText(acc.authid);
@@ -641,6 +649,35 @@ void AccountModifyDlg::updateBlockedContacts(const PrivacyList& l)
 	setPrivacyTabEnabled(true);
 }
 
+
+void AccountModifyDlg::generateToken()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Change Token");
+    msgBox.setText("Are you sure ?");
+    QIcon i = QIcon();
+    i.addPixmap(QPixmap("://iconsets/system/default/jabber.png"));
+    msgBox.setWindowIcon(i);
+    msgBox.setStandardButtons(QMessageBox::No);
+    msgBox.addButton(QMessageBox::Yes);
+    if(msgBox.exec() == QMessageBox::Yes){
+        int tokenLength = 8;
+        QCA::SecureArray randomBytes(tokenLength);
+        QString stringToken;
+        randomBytes=QCA::Random::randomArray(tokenLength);
+        stringToken = QCA::Hex().arrayToString(randomBytes).toAscii().data();
+        le_pass->setText(stringToken);
+        lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "token="+stringToken+"\"> Click here to validate your access token</a>");
+
+    }else {
+
+    }
+
+
+}
+
+
+
 void AccountModifyDlg::changeList_error()
 {
 	privacyInitialized = false;
@@ -653,4 +690,6 @@ void AccountModifyDlg::getDefaultList_error()
 	lb_privacyStatus->setText(tr("Your server does not support blocking."));
 	setPrivacyTabEnabled(false);
 }
+
+
 
