@@ -31,6 +31,7 @@
 #include <QList>
 #include <QUuid>
 #include <QDesktopWidget>
+#include <QMessageBox>
 
 #include "eventdlg.h"
 #include "chatdlg.h"
@@ -199,7 +200,7 @@ void UserAccount::fromOptions(OptionsTree *o, QString base)
 	jid = o->getOption(base + ".jid").toString();
 
     meeting = o->getOption(base + ".meeting").toString();
-
+    emailmconf = o->getOption(base + ".emailmconf").toString();
 	customAuth = o->getOption(base + ".custom-auth.use").toBool();
 	authid = o->getOption(base + ".custom-auth.authid").toString();
 	realm = o->getOption(base + ".custom-auth.realm").toString();
@@ -330,6 +331,7 @@ void UserAccount::toOptions(OptionsTree *o, QString base)
 	o->setOption(base + ".id", id);
 	o->setOption(base + ".name", name);
 	o->setOption(base + ".jid", jid);
+    o->setOption(base + ".emailmconf", emailmconf);
 
     o->setOption(base + ".meeting", meeting);
 
@@ -450,6 +452,7 @@ void UserAccount::fromXml(const QDomElement &a)
 	readEntry(a, "id", &id);
 	readEntry(a, "name", &name);
     readEntry(a, "meeting", &meeting);
+    readEntry(a, "emailmconf", &emailmconf);
 	readBoolAttribute(a, "enabled", &opt_enabled);
 	readBoolAttribute(a, "auto", &opt_auto);
 	readBoolAttribute(a, "showOffline", &tog_offline);

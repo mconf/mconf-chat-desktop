@@ -451,7 +451,7 @@ QVariant ContactListModel::accountData(const ContactListAccountGroup* account, i
 	}
 
 	if (role == JidRole) {
-		return QVariant(account->account()->jid().full());
+        return QVariant(account->account()->jid().full());
 	}
 	// else if (role == PictureRole) {
 	// 	return QVariant(account->account()->picture());

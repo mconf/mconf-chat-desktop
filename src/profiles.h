@@ -51,8 +51,8 @@ public:
 	void toOptions(OptionsTree *o, QString base=QString());
 
 	QString id;
-	QString name;
-	QString jid, pass, host, resource, authid, realm;
+	QString name;    
+    QString jid, pass, host, resource, authid, realm, emailmconf; //emailmconf is the email used for login (which "@" is encoded to "_at_" in the jid string)
     QString meeting;
 	bool customAuth;
 	int port, priority;

@@ -1446,7 +1446,7 @@ void PsiAccount::setUserAccount(const UserAccount &_acc)
 		oldfname = d->pathToProfileEvents();
 	}
 
-	d->acc = acc;
+	d->acc = acc;    
 	d->setEnabled(enabled());
 
 	// rename queue file?
@@ -1468,6 +1468,7 @@ void PsiAccount::setUserAccount(const UserAccount &_acc)
 
 	// d->cp->setName(d->acc.name);
 
+    d->acc.emailmconf = acc.emailmconf;
 	Jid j = acc.jid;
 	d->nextJid = j;
 	if(!isActive()) {
@@ -4391,6 +4392,9 @@ void PsiAccount::dj_formCancel(const XData& data, const QString& thread, const J
 void PsiAccount::dj_add(const XMPP::Jid &j, const QString &name, const QStringList &groups, bool authReq)
 {
 	JT_Roster *r = new JT_Roster(d->client->rootTask());
+    QMessageBox mb;
+    mb.setText(j.full());
+    mb.exec();
 	r->set(j, name, groups);
 	r->go(true);
 
@@ -4400,7 +4404,7 @@ void PsiAccount::dj_add(const XMPP::Jid &j, const QString &name, const QStringLi
 
 void PsiAccount::dj_authReq(const Jid &j)
 {
-	d->client->sendSubscription(j, "subscribe", nick());
+    d->client->sendSubscription(j, "subscribe", nick());
 }
 
 #ifdef YAPSI

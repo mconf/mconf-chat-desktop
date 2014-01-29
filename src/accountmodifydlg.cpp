@@ -20,6 +20,7 @@
 
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QHostInfo>
 
 #include "accountmodifydlg.h"
 #include "pgputil.h"
@@ -68,7 +69,10 @@ void AccountModifyDlg::init()
 	setWindowIcon(IconsetFactory::icon("psi/account").icon());
 #endif
 
-	le_pass->setEnabled(true);
+    le_pass->setEnabled(false);
+    le_pass->hide();
+    textLabel1->hide();
+    newTokenButton->hide();
 	le_host->setEnabled(false);
 	lb_host->setEnabled(false);
 	le_port->setEnabled(false);
@@ -86,7 +90,7 @@ void AccountModifyDlg::init()
 	connect(ck_host, SIGNAL(toggled(bool)), SLOT(hostToggled(bool)));
 	connect(pb_key, SIGNAL(clicked()), SLOT(chooseKey()));
 	connect(pb_keyclear, SIGNAL(clicked()), SLOT(clearKey()));
-	connect(buttonBox->button(QDialogButtonBox::Save), SIGNAL(clicked()), SLOT(save()));
+    connect(buttonBox->button(QDialogButtonBox::Save), SIGNAL(clicked()), SLOT(save()));
     connect(newTokenButton, SIGNAL(clicked()), SLOT(generateToken()));
 	connect(ck_automatic_resource, SIGNAL(toggled(bool)), le_resource, SLOT(setDisabled(bool)));
 	connect(ck_automatic_resource, SIGNAL(toggled(bool)), lb_resource, SLOT(setDisabled(bool)));
@@ -107,7 +111,9 @@ void AccountModifyDlg::init()
 
 	// Hide the name if necessary
 	le_name->setText(acc.name);
-	le_jid->setText(JIDUtil::accountToString(acc.jid,false));
+    le_jid->setText(acc.emailmconf);
+
+
 
 	cb_ssl->addItem(tr("Always"),UserAccount::SSL_Yes);
 	cb_ssl->addItem(tr("When available"),UserAccount::SSL_Auto);
@@ -132,7 +138,10 @@ void AccountModifyDlg::init()
         le_pass->setText(stringToken);
     }
 
-    lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "token="+le_pass->text()+"\">" + lb_discover_token->text() + "</a>");
+
+    QString hostName = QHostInfo::localHostName();
+
+    lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "?token="+le_pass->text()+"&application=mconf-chat-desktop@"+hostName+"\">" + lb_discover_token->text() + "</a>");
 
 	ck_host->setChecked(acc.opt_host);
 	le_host->setText(acc.host);
@@ -150,7 +159,7 @@ void AccountModifyDlg::init()
 	le_realm->setText(acc.realm);
 
 	ck_compress->setChecked(acc.opt_compress);
-	ck_auto->setChecked(acc.opt_auto);
+    ck_auto->setChecked(acc.opt_auto);
 	ck_reconn->setChecked(acc.opt_reconn);
 	ck_connectAfterSleep->setChecked(acc.opt_connectAfterSleep);
 	ck_log->setChecked(acc.opt_log);
@@ -186,10 +195,10 @@ void AccountModifyDlg::init()
 	// Name
 	if(le_name->text().isEmpty())
 		le_name->setFocus();
-	else if(le_jid->text().isEmpty())
+    else if(le_jid->text().isEmpty())
 		le_jid->setFocus();
 	else
-		buttonBox->button(QDialogButtonBox::Save)->setFocus();
+        buttonBox->button(QDialogButtonBox::Save)->setFocus();
 
 	// Privacy
 	privacyInitialized = false;
@@ -482,16 +491,22 @@ void AccountModifyDlg::save()
 		return;
 	}*/
 
-	Jid newJid( JIDUtil::accountFromString(le_jid->text().trimmed()) );
-	if ( newJid.node().isEmpty() || newJid.domain().isEmpty() ) {
-		if (!PsiOptions::instance()->getOption("options.account.domain").toString().isEmpty()) {
-			QMessageBox::information(this, tr("Error"), tr("<i>Username</i> is invalid."));
+    QString emailmconf_t = le_jid->text().trimmed();
+    QString tempJid = encodeAtChar(emailmconf_t);
+    le_jid->setText(tempJid);
+
+    Jid newJid( JIDUtil::accountFromString(tempJid));
+    //Jid newJid( JIDUtil::accountFromString(tempJid));
+
+    if ( newJid.node().isEmpty() || newJid.domain().isEmpty() ) {
+        if (PsiOptions::instance()->getOption("options.account.domain").toString().isEmpty()) {
+            QMessageBox::information(this, tr("Error"), tr("<i>Username</i> is invalid."));
 		}
 		else {
 			QMessageBox::information(this, tr("Error"), tr("<i>XMPP Address</i> must be specified in the format <i>user@host</i>."));
 		}
 		return;
-	}
+    }
 
 	// do not allow duplicate account names
 	if (!pa && le_name->text().isEmpty())
@@ -514,6 +529,8 @@ void AccountModifyDlg::save()
 
 	acc.name = le_name->text();
 	acc.jid = JIDUtil::accountFromString(le_jid->text().trimmed()).bare();
+    acc.emailmconf = emailmconf_t;
+
 	acc.pass = le_pass->text();
 	acc.opt_pass = !acc.pass.isEmpty();
 
@@ -554,6 +571,8 @@ void AccountModifyDlg::save()
 	if (pa) {
 		pa->setUserAccount(acc);
 
+
+
 		if (pa->isActive()) {
 			QMessageBox messageBox(QMessageBox::Information, tr("Warning"),
 								   tr("This account is currently active, so certain changes may not take effect until the next login."),
@@ -572,10 +591,12 @@ void AccountModifyDlg::save()
 		pa->reconfigureFTManager();
 	}
 	else {
+
 		psi->contactList()->createAccount(acc);
+
 	}
 
-	accept();
+    accept();
 }
 
 void AccountModifyDlg::tabChanged(int)
@@ -667,7 +688,8 @@ void AccountModifyDlg::generateToken()
         randomBytes=QCA::Random::randomArray(tokenLength);
         stringToken = QCA::Hex().arrayToString(randomBytes).toAscii().data();
         le_pass->setText(stringToken);
-        lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "token="+stringToken+"\"> Click here to validate your access token</a>");
+        QString hostName = QHostInfo::localHostName();
+        lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "?token="+stringToken+"&application=mconf-chat-desktop@"+hostName+"\"> Click here to validate this application</a>");
 
     }else {
 
@@ -676,6 +698,16 @@ void AccountModifyDlg::generateToken()
 
 }
 
+
+QString AccountModifyDlg::encodeAtChar(QString s){
+    s.replace("@","\\40");
+    return s;
+}
+
+QString AccountModifyDlg::decodeAtChar(QString s){
+    s.replace("\\40","@");
+    return s;
+}
 
 
 void AccountModifyDlg::changeList_error()

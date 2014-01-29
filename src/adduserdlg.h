@@ -56,12 +56,14 @@ private slots:
 
 	void jid_Changed();
 
+
 private:
 	void init(const QStringList &groups, PsiAccount *);
 	class Private;
 	Private *d;
 
 	XMPP::Jid jid() const;
+
 	void errorGateway(const QString &str, const QString &err);
 };
 

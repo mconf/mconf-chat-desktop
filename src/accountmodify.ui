@@ -171,7 +171,7 @@
             <item>
              <widget class="QLabel" name="lb_discover_token">
               <property name="text">
-               <string>Click here to validate your access token</string>
+               <string>Click here to validate this application</string>
               </property>
               <property name="openExternalLinks">
                <bool>true</bool>

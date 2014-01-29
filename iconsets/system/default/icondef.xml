@@ -157,7 +157,7 @@
 
 	<icon>
 		<x xmlns='name'>psi/main</x>
-		<object mime='image/png'>psimain.png</object>
+                <object mime='image/png'>logo_16.png</object>
 	</icon>
 
 	<icon>

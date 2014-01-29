@@ -30,6 +30,8 @@
 #include <QColor>
 #include "xmpp/base64/base64.h"
 
+
+#include <QMessageBox>
 using namespace XMPP;
 
 // FIXME: Helpers from xmpp_xmlcommon.h would be very appropriate for
@@ -312,13 +314,15 @@ void VariantTree::toXml(QDomDocument &doc, QDomElement& ele) const
 {
 	// Subtrees
 	foreach (QString node, trees_.keys()) {
-		Q_ASSERT(!node.isEmpty());
+        Q_ASSERT(!node.isEmpty());
+
 		QDomElement nodeEle = doc.createElement(node);
-		trees_[node]->toXml(doc, nodeEle);
-		if (comments_.contains(node))
-			nodeEle.setAttribute("comment",comments_[node]);
+        trees_[node]->toXml(doc, nodeEle);
+
+        if (comments_.contains(node))
+            nodeEle.setAttribute("comment",comments_[node]);
 		ele.appendChild(nodeEle);
-	}
+    }
 	
 	// Values
 	foreach (QString child, values_.keys()) {

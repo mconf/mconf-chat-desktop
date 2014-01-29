@@ -22,6 +22,7 @@
 
 #include <QTimer>
 
+
 #include "psiaccount.h"
 #include "psievent.h"
 #include "accountadddlg.h"
@@ -186,7 +187,7 @@ PsiAccount* PsiContactList::createAccount(const QString& name, const Jid& j, con
 
 void PsiContactList::createAccount(const UserAccount& acc)
 {
-	loadAccount(acc);
+	loadAccount(acc);    
 	emit saveAccounts();
 }
 

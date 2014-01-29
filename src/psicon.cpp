@@ -240,12 +240,13 @@ public:
 			if (ua.optionsBase.isEmpty()) {
 				QString base;
 				do {
-					base = "accounts.a"+QString::number(idx++);
+                    base = "accounts.a"+QString::number(idx++);
 				} while (cbases.contains(base));
 				cbases += base;
-				ua.toOptions(&accountTree, base);
+                ua.toOptions(&accountTree, base); //aqui
+
 			}
-		}
+		}       
 		QFile accountsFile(pathToProfile(activeProfile, ApplicationInfo::ConfigLocation) + "/accounts.xml");
 		accountTree.saveOptions(accountsFile.fileName(), "accounts", ApplicationInfo::optionsNS(), ApplicationInfo::version());;
 
@@ -624,7 +625,7 @@ bool PsiCon::init()
 						haveEnabled = it->opt_enabled;
 						if (it->opt_enabled) {
 							if (!PsiOptions::instance()->getOption("options.account.domain").toString().isEmpty())
-								it->jid = JIDUtil::accountFromString(Jid(it->jid).node()).bare();
+                                it->jid = JIDUtil::accountFromString(Jid(it->jid).node()).bare();
 						}
 					}
 					else
@@ -946,16 +947,27 @@ PsiAccount* PsiCon::createAccount(const QString &name, const Jid &j, const QStri
 PsiAccount *PsiCon::createAccount(const UserAccount& _acc)
 {
 	UserAccount acc = _acc;
-	PsiAccount *pa = new PsiAccount(acc, d->contactList, d->capsRegistry, d->tabManager);
+
+
+    PsiAccount *pa = new PsiAccount(acc, d->contactList, d->capsRegistry, d->tabManager);
+
+
+
 //	connect(&d->idle, SIGNAL(secondsIdle(int)), pa, SLOT(secondsIdle(int)));
-	connect(pa, SIGNAL(updatedActivity()), SLOT(pa_updatedActivity()));
-	connect(pa, SIGNAL(updatedAccount()), SLOT(pa_updatedAccount()));
+
+
+    connect(pa, SIGNAL(updatedActivity()), SLOT(pa_updatedActivity()));
+    connect(pa, SIGNAL(updatedAccount()), SLOT(pa_updatedAccount()));
 	connect(pa, SIGNAL(queueChanged()), SLOT(queueChanged()));
-	connect(pa, SIGNAL(startBounce()), SLOT(startBounce()));
-	if (d->s5bServer) {
-		pa->client()->s5bManager()->setServer(d->s5bServer);
-	}
-	return pa;
+    connect(pa, SIGNAL(startBounce()), SLOT(startBounce()));
+
+    //Continuar aqui comentando a linha de cima (PsiAccount...)
+
+    if (d->s5bServer) {
+        pa->client()->s5bManager()->setServer(d->s5bServer);
+    }
+
+    return pa;
 }
 
 void PsiCon::removeAccount(PsiAccount *pa)
@@ -1100,7 +1112,7 @@ void PsiCon::pa_updatedActivity()
 void PsiCon::pa_updatedAccount()
 {
 	PsiAccount *pa = (PsiAccount *)sender();
-	emit accountUpdated(pa);
+    emit accountUpdated(pa);
 
 	d->updatedAccountTimer_->start();
 }
@@ -1109,7 +1121,7 @@ void PsiCon::saveAccounts()
 {
 	d->updatedAccountTimer_->stop();
 
-	UserAccountList acc = d->contactList->getUserAccountList();
+    UserAccountList acc = d->contactList->getUserAccountList();
 	d->saveProfile(acc);
 }
 

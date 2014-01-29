@@ -71,6 +71,8 @@ private slots:
  	void removeBlockClicked();
  	void updateBlockedContacts(const PrivacyList&);
     void generateToken();
+    QString encodeAtChar(QString s);
+    QString decodeAtChar(QString s);
  	void getDefaultList_error();
  	void changeList_error();
 

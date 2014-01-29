@@ -76,7 +76,7 @@ AddUserDlg::AddUserDlg(const XMPP::Jid &jid, const QString &nick, const QString 
 {
 	init(groups, pa);
 
-	le_jid->setText(jid.full());	// TODO: do we want to encourage adding jids with resource?
+    le_jid->setText(jid.full());	// TODO: do we want to encourage adding jids with resource?
 	le_nick->setText(nick);
 
 	QStringList suggestedGroups = groups.filter(group, Qt::CaseInsensitive);
@@ -148,7 +148,7 @@ AddUserDlg::~AddUserDlg()
 
 Jid AddUserDlg::jid() const
 {
-	return Jid(le_jid->text().trimmed());
+    return Jid(le_jid->text().trimmed().replace("@","\\40")+"@red-clara-chat.inf.ufrgs.br");
 }
 
 void AddUserDlg::cancel()
@@ -167,7 +167,7 @@ void AddUserDlg::ok()
 
 	if(le_jid->text().isEmpty()) {
 		QMessageBox::information(this, tr("Add User: Error"), tr("Please fill in the XMPP address of the person you wish to add."));
-		return;
+        return;
 	}
 	if(!jid().isValid()) {
 		QMessageBox::information(this, tr("Add User: Error"), tr("The XMPP address you entered is not valid!\nMake sure you enter a fully qualified XMPP address."));
@@ -259,13 +259,14 @@ void AddUserDlg::jt_setFinished()
 	d->jt = 0;
 
 	if(jt->success()) {
-		QString jid = jt->translatedJid().full();
+        QString jid = jt->translatedJid().full();
+
 		if (jid.isEmpty()) {
 			jid = jt->prompt();
 			// we used to read only prompt() in the past,
 			// and many gateways still send it
 		}
-		le_jid->setText(jid);
+        le_jid->setText(jid);
 		le_nick->setText(le_transPrompt->text());
 		le_transPrompt->setText("");
 		le_jid->setCursorPosition(0);

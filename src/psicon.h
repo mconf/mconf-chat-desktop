@@ -188,7 +188,7 @@ private:
 	friend class PsiAccount; // FIXME
 	void promptUserToCreateAccount();
 	QString optionsFile() const;
-	void doQuit(int);
+    void doQuit(int);
 
 	void registerCaps(const QString& ext, const QStringList& features);
 };

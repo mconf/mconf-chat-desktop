@@ -100,21 +100,26 @@ QString JIDUtil::nickOrJid(const QString &nick, const QString &jid)
 		return nick;
 }
 
-QString JIDUtil::accountToString(const Jid& j, bool withResource)
-{
-	QString s = j.node();
-	if (!defaultDomain().isEmpty()) {
+
+
+QString JIDUtil::accountToString(const Jid& j, bool withResource){
+
+    QString s = j.node();
+	if (!defaultDomain().isEmpty()) {        
 		return (withResource && !j.resource().isEmpty() ? j.node() + "/" + j.resource() : j.node());
 	}
 	else {
-		return (withResource ? j.full() : j.bare());
+        return (withResource ? j.node() : j.bare());
 	}
 }
 
+
+
 Jid JIDUtil::accountFromString(const QString& s)
 {
-	if (!defaultDomain().isEmpty()) {
-		return Jid(s, defaultDomain(), "");
+
+    if (!defaultDomain().isEmpty()) {
+        return Jid(s, defaultDomain(), "");
 	}
 	else {
 		return Jid(s);
@@ -135,7 +140,8 @@ QString JIDUtil::encode822(const QString &s)
 {
 	QString out;
 	for(int n = 0; n < (int)s.length(); ++n) {
-		if(s[n] == '\\' || s[n] == '<' || s[n] == '>') {
+        //if(s[n] == '\\' || s[n] == '<' || s[n] == '>') {
+        if(s[n] == '<' || s[n] == '>') {
 			QString hex;
 			hex.sprintf("\\x%02X", (unsigned char )s[n].toLatin1());
 			out.append(hex);
@@ -150,7 +156,8 @@ QString JIDUtil::decode822(const QString &s)
 {
 	QString out;
 	for(int n = 0; n < (int)s.length(); ++n) {
-		if(s[n] == '\\' && n + 3 < (int)s.length()) {
+        //if(s[n] == '\\' && n + 3 < (int)s.length()) {
+        /*if(s[n] == '\\' && n + 3 < (int)s.length()) {
 			int x = n + 1;
 			n += 3;
 			if(s[x] != 'x')
@@ -161,7 +168,7 @@ QString JIDUtil::decode822(const QString &s)
 			QChar c(val);
 			out += c;
 		}
-		else
+        else*/
 			out += s[n];
 	}
 	return out;

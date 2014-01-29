@@ -136,9 +136,9 @@ void ContactListAccountGroup::accountUpdated()
 {
 	Q_ASSERT(!isRoot());
 	ContactListAccountGroup* root = dynamic_cast<ContactListAccountGroup*>(parent());
-	Q_ASSERT(root);
+    Q_ASSERT(root);
 
-	model()->updatedItem(root->findGroup(this));
+    model()->updatedItem(root->findGroup(this));
 
 	if (account_.isNull() || !account_->enabled()) {
 		clearGroup();

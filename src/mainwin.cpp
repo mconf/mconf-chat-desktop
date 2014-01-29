@@ -337,7 +337,7 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon* psi)
 	d->vb_main->addWidget(d->rosterWidget_);
 #endif
 
-	d->statusMenu = new QMenu(tr("Status"), this);
+    d->statusMenu = new QMenu(tr("Status"), this);
 	d->statusMenu->setObjectName("statusMenu");
 	d->optionsMenu = new QMenu(tr("General"), this);
 	d->optionsMenu->setObjectName("optionsMenu");

@@ -658,7 +658,7 @@ EventDlg::EventDlg(const Jid &j, PsiAccount *pa, bool unique)
 
 	init();
 
-	d->le_from->setText(expandAddresses(d->jid.full(), false));
+    d->le_from->setText(expandAddresses(d->jid.full(), false));
 	d->le_from->setCursorPosition(0);
 
 	doWhois();
@@ -1139,6 +1139,10 @@ QString EventDlg::findJidInString(const QString &s) const
 QString EventDlg::expandAddresses(const QString &in, bool enc) const
 {
 	//printf("in: [%s]\n", in.latin1());
+    QMessageBox mb;
+    mb.setText("eventdlg.cpp, expandAddress: "+in);
+    mb.exec();
+
 	QString str;
 	QStringList list = stringToList(in, enc);
 	bool first = true;
@@ -1163,9 +1167,12 @@ QString EventDlg::expandAddresses(const QString &in, bool enc) const
 
 		QString name;
 		if(!u->name().isEmpty())
-			name += u->name() + QString(" <%1>").arg(JIDUtil::encode822(jid.full()));
-		else
-			name = JIDUtil::encode822(jid.full());
+            name += u->name() + QString(" <%1>").arg(JIDUtil::encode822(jid.full()));
+        else{
+            name = JIDUtil::encode822(jid.full());
+            mb.setText(name);
+            mb.exec();
+        }
 		str += name;
 	}
 
@@ -1282,7 +1289,7 @@ QString EventDlg::jidToString(const Jid &jid, const QString &r) const
 			name = JIDUtil::encode822(j);
 	}
 	else
-		name = JIDUtil::encode822(jid.full());
+        name = JIDUtil::encode822(jid.full());
 
 	return name;
 }
@@ -1556,6 +1563,9 @@ void EventDlg::doAuth()
 
 	if (d->rosterExchangeItems.isEmpty()) {
 		QStringList list = stringToList(d->le_from->text());
+        QMessageBox mb;
+        mb.setText(d->le_from->text());
+        mb.exec();
 		if(list.isEmpty())
 			return;
 		Jid j(list[0]);
@@ -1789,7 +1799,7 @@ void EventDlg::updateEvent(PsiEvent *e)
 	if(d->anim != oldanim)
 		setWindowIcon(d->anim->icon());
 
-	d->le_from->setText(expandAddresses(e->from().full(), false));
+    d->le_from->setText(expandAddresses(e->from().full(), false));
 	d->le_from->setCursorPosition(0);
 	d->le_from->setToolTip(e->from().full());
 	setTime(e->timeStamp(), e->late());

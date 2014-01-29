@@ -110,9 +110,9 @@ void AccountAddDlg::add()
 
 		delete w;
 
-		newAccount = psi->createAccount(le_name->text(), jid, pass, opt_host, host, port, legacy_ssl_probe, ssl, proxy, tlsOverrideDomain, tlsOverrideCert);
+        newAccount = psi->createAccount(le_name->text(), jid, pass, opt_host, host, port, legacy_ssl_probe, ssl, proxy, tlsOverrideDomain, tlsOverrideCert);
 	}
-	else {
+    else {
 		newAccount = psi->createAccount(le_name->text());
 	}
 
