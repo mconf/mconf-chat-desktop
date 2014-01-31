@@ -4353,7 +4353,7 @@ void PsiAccount::dj_addAuth(const Jid &j, const QString& nick)
 		name = nick;
 	}
 
-	dj_add(j, name, groups, true);
+    dj_add(j, name, groups, true);
 	dj_auth(j);
 }
 
@@ -4392,9 +4392,7 @@ void PsiAccount::dj_formCancel(const XData& data, const QString& thread, const J
 void PsiAccount::dj_add(const XMPP::Jid &j, const QString &name, const QStringList &groups, bool authReq)
 {
 	JT_Roster *r = new JT_Roster(d->client->rootTask());
-    QMessageBox mb;
-    mb.setText(j.full());
-    mb.exec();
+
 	r->set(j, name, groups);
 	r->go(true);
 

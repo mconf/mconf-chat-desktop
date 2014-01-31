@@ -409,9 +409,9 @@ void PsiChatDlg::contactUpdated(UserListItem* u, int status, const QString& stat
 		else
 			name = j;
 
-		ui_.le_jid->setText(name);
+        ui_.le_jid->setText(name.replace("\\40","@"));
 		ui_.le_jid->setCursorPosition(0);
-		ui_.le_jid->setToolTip(name);
+        ui_.le_jid->setToolTip(name.replace("\\40","@"));
 	}
 }
 

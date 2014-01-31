@@ -590,11 +590,17 @@ void AccountModifyDlg::save()
 		}
 		pa->reconfigureFTManager();
 	}
-	else {
+    else {
 
-		psi->contactList()->createAccount(acc);
+        //QMessageBox mb;
+        //mb.setText("test contact list add");
+        //mb.exec();
+
+        psi->contactList()->createAccount(acc);
 
 	}
+
+
 
     accept();
 }

@@ -451,7 +451,7 @@ void ChatDlg::updateContact(const Jid &j, bool fromPresence)
 			updatePGP();
 
 			if (fromPresence && statusChanged) {
-				QString msg = tr("%1 is %2").arg(TextUtil::escape(dispNick_)).arg(status2txt(status_));
+                QString msg = tr("%1 is %2").arg(TextUtil::escape(dispNick_.replace("\\40","@"))).arg(status2txt(status_));
 				if (!statusString_.isEmpty()) {
 					QString ss = TextUtil::linkify(TextUtil::plain2rich(statusString_));
 					if (PsiOptions::instance()->getOption("options.ui.emoticons.use-emoticons").toBool()) {

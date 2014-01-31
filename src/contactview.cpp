@@ -224,9 +224,9 @@ const QString & ContactProfile::name() const
 
 void ContactProfile::setName(const QString &name)
 {
-	d->name = name;
+    d->name = name;
 	if (d->cvi) {
-		d->cvi->setProfileName(name);
+        d->cvi->setProfileName(name);
 	}
 }
 
@@ -1416,10 +1416,10 @@ void ContactProfile::doContextMenu(ContactViewItem *i, const QPoint &pos)
 			d->cv->qa_hist->addTo(&pm);
 		}
 
-		QString name = u->jid().full();
+        QString name = u->jid().full();
 		QString show = JIDUtil::nickOrJid(u->name(), u->jid().full());
-		if(name != show)
-			name += QString(" (%1)").arg(u->name());
+        if(name != show)
+            name += QString(" (%1)").arg(u->name());
 
 		int x = pm.exec(pos);
 
@@ -2636,7 +2636,7 @@ Q3DragObject *ContactView::dragObject()
 	if(i->type() != ContactViewItem::Contact)
 		return 0;
 
-	Q3DragObject *d = new Q3TextDrag(i->u()->jid().full(), this);
+    Q3DragObject *d = new Q3TextDrag(i->u()->jid().full(), this);
 	d->setPixmap(IconsetFactory::iconPixmap("status/online"), QPoint(8,8));
 	return d;
 }
@@ -2958,14 +2958,14 @@ ContactViewItem::ContactViewItem(const QString &profileName, ContactProfile *cp,
 {
 	type_ = Profile;
 	d = new Private(this, cp);
-	d->profileName = profileName;
+    d->profileName = profileName;
 	d->alerting = false;
 	d->ssl = false;
 	d->status_single = !PsiOptions::instance()->getOption("options.ui.contactlist.status-messages.single-line").toBool();
 
 	setProfileState(STATUS_OFFLINE);
 	if (!PsiOptions::instance()->getOption("options.ui.account.single").toBool())
-		setText(0, profileName);
+        setText(0, profileName);
 
 	d->initGroupState();
 }
@@ -3352,7 +3352,7 @@ void ContactViewItem::setProfileName(const QString &name)
 {
 	d->profileName = name;
 	if (!PsiOptions::instance()->getOption("options.ui.account.single").toBool())
-		setText(0, d->profileName);
+        setText(0, d->profileName);
 	else
 		setText(0, "");
 }
@@ -3404,7 +3404,7 @@ void ContactViewItem::resetStatus()
 void ContactViewItem::resetName(bool forceNoStatusMsg)
 {
 	if ( d->u ) {
-		QString s = JIDUtil::nickOrJid(d->u->name(), d->u->jid().full());
+        QString s = JIDUtil::nickOrJid(d->u->name(), d->u->jid().full());
 
 		if (d->status_single && !forceNoStatusMsg) {
 			s = "<nobr>" + TextUtil::plain2rich(s) + "</nobr>";
@@ -3609,7 +3609,7 @@ void ContactViewItem::setContact(UserListItem *u)
 
 	// Hack, but that's the safest way.
 	resetName();
-	QString newName = text(0);
+    QString newName = text(0);
 	if(newName != oldName) {
 		needUpdate = true;
 	}

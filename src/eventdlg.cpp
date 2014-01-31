@@ -1138,10 +1138,7 @@ QString EventDlg::findJidInString(const QString &s) const
 
 QString EventDlg::expandAddresses(const QString &in, bool enc) const
 {
-	//printf("in: [%s]\n", in.latin1());
-    QMessageBox mb;
-    mb.setText("eventdlg.cpp, expandAddress: "+in);
-    mb.exec();
+    //printf("in: [%s]\n", in.latin1());
 
 	QString str;
 	QStringList list = stringToList(in, enc);
@@ -1170,13 +1167,11 @@ QString EventDlg::expandAddresses(const QString &in, bool enc) const
             name += u->name() + QString(" <%1>").arg(JIDUtil::encode822(jid.full()));
         else{
             name = JIDUtil::encode822(jid.full());
-            mb.setText(name);
-            mb.exec();
         }
-		str += name;
+        str += name;
 	}
 
-	//printf("expanding: [%s]\n", str.latin1());
+    //printf("expanding: [%s]\n", str.latin1());
 	return str;
 }
 
@@ -1562,10 +1557,8 @@ void EventDlg::doAuth()
 		return;
 
 	if (d->rosterExchangeItems.isEmpty()) {
-		QStringList list = stringToList(d->le_from->text());
-        QMessageBox mb;
-        mb.setText(d->le_from->text());
-        mb.exec();
+        QStringList list = stringToList(d->le_from->text());
+
 		if(list.isEmpty())
 			return;
 		Jid j(list[0]);
