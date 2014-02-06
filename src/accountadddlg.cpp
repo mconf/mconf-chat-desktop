@@ -120,6 +120,8 @@ void AccountAddDlg::add()
 	if (newAccount) {
 		newAccount->modify();
 	}
+
+
 }
 
 void AccountAddDlg::setAddButton(const QString &s)

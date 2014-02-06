@@ -946,22 +946,17 @@ PsiAccount* PsiCon::createAccount(const QString &name, const Jid &j, const QStri
 
 PsiAccount *PsiCon::createAccount(const UserAccount& _acc)
 {
-	UserAccount acc = _acc;
-
+    UserAccount acc = _acc;
 
     PsiAccount *pa = new PsiAccount(acc, d->contactList, d->capsRegistry, d->tabManager);
 
 
-
 //	connect(&d->idle, SIGNAL(secondsIdle(int)), pa, SLOT(secondsIdle(int)));
-
 
     connect(pa, SIGNAL(updatedActivity()), SLOT(pa_updatedActivity()));
     connect(pa, SIGNAL(updatedAccount()), SLOT(pa_updatedAccount()));
-	connect(pa, SIGNAL(queueChanged()), SLOT(queueChanged()));
-    connect(pa, SIGNAL(startBounce()), SLOT(startBounce()));
-
-    //Continuar aqui comentando a linha de cima (PsiAccount...)
+    connect(pa, SIGNAL(queueChanged()), SLOT(queueChanged()));
+    connect(pa, SIGNAL(startBounce()), SLOT(startBounce()));    
 
     if (d->s5bServer) {
         pa->client()->s5bManager()->setServer(d->s5bServer);

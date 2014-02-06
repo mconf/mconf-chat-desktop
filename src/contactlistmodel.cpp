@@ -190,8 +190,7 @@ void ContactListModel::endBulkUpdate()
 		else if (doLayoutUpdateAfterBulkUpdate_) {
 			// emit layoutAboutToBeChanged();
 			emit layoutChanged();
-		}*/
-
+        }*/
 		endResetModel();
 	}
 }

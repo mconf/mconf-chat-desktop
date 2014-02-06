@@ -527,7 +527,7 @@ void AccountModifyDlg::save()
 		aname = def + '_' + QString::number(++n);
 	le_name->setText( aname );
 
-	acc.name = le_name->text();
+    acc.name = le_name->text();
 	acc.jid = JIDUtil::accountFromString(le_jid->text().trimmed()).bare();
     acc.emailmconf = emailmconf_t;
 
@@ -568,7 +568,7 @@ void AccountModifyDlg::save()
 
 	acc.proxyID = pc->currentItem();
 
-	if (pa) {
+	if (pa) {        
 		pa->setUserAccount(acc);
 
 
@@ -590,17 +590,9 @@ void AccountModifyDlg::save()
 		}
 		pa->reconfigureFTManager();
 	}
-    else {
-
-        //QMessageBox mb;
-        //mb.setText("test contact list add");
-        //mb.exec();
-
+    else {        
         psi->contactList()->createAccount(acc);
-
 	}
-
-
 
     accept();
 }

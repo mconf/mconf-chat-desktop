@@ -252,10 +252,12 @@ public:
 	AccountManageItem(QTreeWidget *par, PsiAccount *_pa)
 	:QTreeWidgetItem(par)
 	{
-		pa = _pa;
+
+        pa = _pa;
 		Q_ASSERT(!pa.isNull());
 		connect(pa, SIGNAL(updatedActivity()), SLOT(updateInfo()));
 		connect(pa, SIGNAL(updatedAccount()), SLOT(updateInfo()));
+
 		updateInfo();
 	}
 
@@ -274,9 +276,9 @@ public:
 private slots:
 	void updateInfo()
 	{
-		UserAccount acc = pa->accountOptions();
-		Jid j = acc.jid;
-		setText(0, pa->name());
+		UserAccount acc = pa->accountOptions();        
+        Jid j = acc.jid;
+        setText(0, pa->name());
 		setText(1, acc.opt_host && acc.host.length() ? acc.host : j.domain());
 		setText(2, pa->isActive() ? AccountManageDlg::tr("Active") : AccountManageDlg::tr("Not active"));
 		setCheckState(0, pa->enabled() ? Qt::Checked : Qt::Unchecked);
@@ -393,7 +395,7 @@ void AccountManageDlg::remove()
 
 void AccountManageDlg::accountAdded(PsiAccount *pa)
 {
-	new AccountManageItem(lv_accs, pa);
+    new AccountManageItem(lv_accs, pa);
 }
 
 void AccountManageDlg::accountRemoved(PsiAccount *pa)

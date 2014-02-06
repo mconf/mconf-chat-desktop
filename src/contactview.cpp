@@ -150,8 +150,7 @@ ContactProfile::ContactProfile(PsiAccount *pa, const QString &name, ContactView 
 	d->cv->link(this);
 	d->t = new QTimer;
 	connect(d->t, SIGNAL(timeout()), SLOT(updateGroups()));
-	connect(pa->psi(), SIGNAL(accountCountChanged()), d, SLOT(numAccountsChanged()));
-
+	connect(pa->psi(), SIGNAL(accountCountChanged()), d, SLOT(numAccountsChanged()));    
 	d->roster.setAutoDelete(true);
 
 	d->self = 0;
@@ -1095,7 +1094,7 @@ void ContactProfile::doContextMenu(ContactViewItem *i, const QPoint &pos)
 			return;
 
 		if(x == 0) {
-			QList<XMPP::Jid> list = contactListFromCVGroup(i);
+            QList<XMPP::Jid> list = contactListFromCVGroup(i);
 
 			// send multi
 			actionSendMessage(list);
@@ -1358,7 +1357,7 @@ void ContactProfile::doContextMenu(ContactViewItem *i, const QPoint &pos)
 
 				d->cv->qa_logon->setEnabled( !avail && online );
 
-				d->cv->qa_logon->setIcon(PsiIconset::instance()->status(e->u.jid(), STATUS_ONLINE).icon());
+                d->cv->qa_logon->setIcon(PsiIconset::instance()->status(e->u.jid(), STATUS_ONLINE).icon());
 				d->cv->qa_logon->addTo(&pm);
 
 				pm.insertItem(PsiIconset::instance()->status(e->u.jid(), STATUS_OFFLINE).icon(), tr("Log Off"), 16);
@@ -1396,7 +1395,7 @@ void ContactProfile::doContextMenu(ContactViewItem *i, const QPoint &pos)
 		if (PsiOptions::instance()->getOption("options.ui.menu.contact.custom-picture").toBool()) {
 			QMenu *avpm = new QMenu(&pm);
 			d->cv->qa_assignAvatar->addTo(avpm);
-			d->cv->qa_clearAvatar->setEnabled(d->pa->avatarFactory()->hasManualAvatar(u->jid()));
+            d->cv->qa_clearAvatar->setEnabled(d->pa->avatarFactory()->hasManualAvatar(u->jid()));
 			d->cv->qa_clearAvatar->addTo(avpm);
 			pm.insertItem(tr("&Picture"), avpm);
 		}
@@ -1417,7 +1416,7 @@ void ContactProfile::doContextMenu(ContactViewItem *i, const QPoint &pos)
 		}
 
         QString name = u->jid().full();
-		QString show = JIDUtil::nickOrJid(u->name(), u->jid().full());
+        QString show = JIDUtil::nickOrJid(u->name(), u->jid().full());
         if(name != show)
             name += QString(" (%1)").arg(u->name());
 

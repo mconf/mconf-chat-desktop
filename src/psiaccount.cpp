@@ -1469,7 +1469,7 @@ void PsiAccount::setUserAccount(const UserAccount &_acc)
 	// d->cp->setName(d->acc.name);
 
     d->acc.emailmconf = acc.emailmconf;
-	Jid j = acc.jid;
+    Jid j = acc.jid;
 	d->nextJid = j;
 	if(!isActive()) {
 		d->jid = j;
@@ -1496,7 +1496,7 @@ void PsiAccount::setUserAccount(const UserAccount &_acc)
 	if(d->avCallManager)
 		d->updateAvCallSettings(d->acc);
 
-	cpUpdate(d->self);
+	cpUpdate(d->self);    
 	emit updatedAccount();
 }
 

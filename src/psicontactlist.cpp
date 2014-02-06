@@ -28,6 +28,7 @@
 #include "accountadddlg.h"
 #include "serverinfomanager.h"
 #include "psicon.h"
+#include <QMessageBox>
 
 /**
  * Constructs new PsiContactList. \param psi will not be PsiContactList's parent though.
@@ -155,14 +156,14 @@ PsiAccount *PsiContactList::defaultAccount() const
  */
 PsiAccount* PsiContactList::createAccount(const QString& name, const Jid& j, const QString& pass, bool opt_host, const QString& host, int port, bool legacy_ssl_probe, UserAccount::SSLFlag ssl, QString proxyID, const QString &tlsOverrideDomain, const QByteArray &tlsOverrideCert)
 {
-	UserAccount acc;
-	acc.name = name;
+    UserAccount acc;
+    acc.name = name;
 
-	acc.jid = j.full();
+    acc.jid = j.full();
 	if(!pass.isEmpty()) { 
 		acc.opt_pass = true;
 		acc.pass = pass;
-	}
+    }
 
 	acc.opt_host = opt_host;
 	acc.host = host;
@@ -179,16 +180,17 @@ PsiAccount* PsiContactList::createAccount(const QString& name, const Jid& j, con
 	acc.tlsOverrideCert = tlsOverrideCert;
 	acc.tlsOverrideDomain = tlsOverrideDomain;
 
-	PsiAccount *pa = loadAccount(acc);
+    PsiAccount *pa = loadAccount(acc);
 	emit saveAccounts();
+
 
 	return pa;
 }
 
-void PsiContactList::createAccount(const UserAccount& acc)
-{
-	loadAccount(acc);    
-	emit saveAccounts();
+void PsiContactList::createAccount(const UserAccount& acc){
+
+    loadAccount(acc);
+    emit saveAccounts();
 }
 
 /**
@@ -244,11 +246,13 @@ PsiAccount* PsiContactList::queueLowestEventId()
  */
 PsiAccount *PsiContactList::loadAccount(const UserAccount& acc)
 {
-	emit beginBulkContactUpdate();
-	PsiAccount *pa = psi_->createAccount(acc);
-	connect(pa, SIGNAL(enabledChanged()), SIGNAL(accountCountChanged()));
-	emit accountAdded(pa);
-	emit endBulkContactUpdate();
+    emit beginBulkContactUpdate();
+    PsiAccount *pa = psi_->createAccount(acc);
+
+    connect(pa, SIGNAL(enabledChanged()), SIGNAL(accountCountChanged()));
+
+    emit accountAdded(pa);
+    emit endBulkContactUpdate();
 	return pa;
 }
 
@@ -260,7 +264,7 @@ void PsiContactList::loadAccounts(const UserAccountList &_list)
 	UserAccountList list = _list;
 	emit beginBulkContactUpdate();
 	foreach(UserAccount account, list)
-		loadAccount(account);
+        loadAccount(account);
 	emit endBulkContactUpdate();
 
 	accountsLoaded_ = true;
@@ -490,7 +494,7 @@ void PsiContactList::accountAddedContact(PsiContact* contact)
 {
 	Q_ASSERT(!contacts_.contains(contact));
 	contacts_.append(contact);
-	emit addedContact(contact);
+    emit addedContact(contact);
 }
 
 void PsiContactList::accountRemovedContact(PsiContact* contact)

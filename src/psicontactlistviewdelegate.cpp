@@ -22,6 +22,7 @@
 
 #include <QPainter>
 #include <QTimer>
+#include <QMessageBox>
 
 #include "psiiconset.h"
 #include "psioptions.h"
@@ -163,6 +164,7 @@ void PsiContactListViewDelegate::drawContact(QPainter* painter, const QStyleOpti
 	o.palette = palette;
 
 	QString text = nameText(o, index);
+    text=text.replace("\\40","@");
 	if (showStatusMessages_ && !statusText(index).isEmpty()) {
 		if(!statusSingle_) {
 			text = tr("%1 (%2)").arg(text).arg(statusText(index));
@@ -248,6 +250,7 @@ void PsiContactListViewDelegate::drawGroup(QPainter* painter, const QStyleOption
 	r.setLeft(pixmapRect.right() + 3);
 
 	QString text = index.data(Qt::ToolTipRole).toString();
+
 	drawText(painter, o, r, text, index);
 
 	if(slimGroup_ && !(option.state & QStyle::State_Selected)) {
@@ -286,6 +289,7 @@ void PsiContactListViewDelegate::drawAccount(QPainter* painter, const QStyleOpti
 	r.setLeft(avatarRect.right() + 3);
 
 	QString text = nameText(o, index);
+
 	r.setRight(r.left() + o.fontMetrics.width(text));
 	drawText(painter, o, r, text, index);
 

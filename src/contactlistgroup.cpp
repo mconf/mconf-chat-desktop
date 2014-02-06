@@ -32,6 +32,8 @@
 #include "fakegroupcontact.h"
 #endif
 
+#include <QMessageBox>
+
 static QString GROUP_DELIMITER = "::";
 
 /**
@@ -224,8 +226,18 @@ void ContactListGroup::addContact(PsiContact* contact, QStringList contactGroups
 		return;
 	Q_ASSERT(!contacts_.contains(contact));
 CL_DEBUG("ContactListGroup(%x)::addContact: %s (items = %d, contacts = %d)", this, qPrintable(contact->jid().full()), items_.count(), contacts_.count());
-	contacts_.append(contact);
-	addItem(new ContactListItemProxy(this, contact));
+
+    //QString tempC = contact->name();
+    //QMessageBox mb;
+    //mb.setText("addContact: "+ contact->jid().full());
+    //mb.exec();
+
+
+    //realizar a modificacao dos dados no ponteiro do PsiContact
+
+    contacts_.append(contact);
+
+    addItem(new ContactListItemProxy(this, contact));
 
 	model_->groupCache()->addContact(this, contact);
 }
