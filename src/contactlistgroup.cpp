@@ -228,12 +228,6 @@ void ContactListGroup::addContact(PsiContact* contact, QStringList contactGroups
 CL_DEBUG("ContactListGroup(%x)::addContact: %s (items = %d, contacts = %d)", this, qPrintable(contact->jid().full()), items_.count(), contacts_.count());
 
     //QString tempC = contact->name();
-    //QMessageBox mb;
-    //mb.setText("addContact: "+ contact->jid().full());
-    //mb.exec();
-
-
-    //realizar a modificacao dos dados no ponteiro do PsiContact
 
     contacts_.append(contact);
 
