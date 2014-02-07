@@ -140,7 +140,7 @@ void ChatDlg::init()
 
 	connect(account(), SIGNAL(pgpKeyChanged()), SLOT(updatePGP()));
 	connect(account(), SIGNAL(encryptedMessageSent(int, bool, int, const QString &)), SLOT(encryptedMessageSent(int, bool, int, const QString &)));
-	account()->dialogRegister(this, jid());
+    account()->dialogRegister(this, jid());
 
 	chatView()->setFocusPolicy(Qt::NoFocus);
 	chatEdit()->setFocus();
@@ -366,7 +366,7 @@ void ChatDlg::setJid(const Jid &j)
 {
 	if (!j.compare(jid())) {
 		account()->dialogUnregister(this);
-		TabbableWidget::setJid(j);
+        TabbableWidget::setJid(j);
 		account()->dialogRegister(this, jid());
 		updateContact(jid(), false);
 	}
