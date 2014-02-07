@@ -704,7 +704,8 @@ void ChatDlg::doSend()
 
 void ChatDlg::doneSend()
 {
-	appendMessage(m_, true);
+
+    appendMessage(m_, true);
 	disconnect(chatEdit(), SIGNAL(textChanged()), this, SLOT(setComposing()));
 	chatEdit()->clear();
 
@@ -811,8 +812,8 @@ void ChatDlg::appendMessage(const Message &m, bool local)
 		}
 	}
 
-	QString txt = messageText(m);
-	QString subject = messageSubject(m);
+    QString txt = messageText(m);
+    QString subject = messageSubject(m);
 
 	ChatDlg::SpooledType spooledType = m.spooled() ?
 									   ChatDlg::Spooled_OfflineStorage :
@@ -822,7 +823,7 @@ void ChatDlg::appendMessage(const Message &m, bool local)
 	else
 		appendNormalMessage(spooledType, m.timeStamp(), local, txt, subject);
 
-	appendMessageFields(m);
+    appendMessageFields(m);
 
 	if (local) {
 		deferredScroll();

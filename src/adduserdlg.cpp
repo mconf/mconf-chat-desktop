@@ -148,7 +148,7 @@ AddUserDlg::~AddUserDlg()
 
 Jid AddUserDlg::jid() const
 {
-    le_nick->setText(le_jid->text().trimmed());
+    //le_nick->setText(le_jid->text().trimmed());
     return Jid(le_jid->text().trimmed().replace("@","\\40")+"@mensajeria.redclara.net");
 }
 

@@ -557,13 +557,13 @@ void PsiChatDlg::appendNormalMessage(SpooledType spooled, const QDateTime& time,
 		if (!subjectLine.isEmpty()) {
 			chatView()->appendText(subjectLine);
 		}
-		chatView()->appendText(txt);
+		chatView()->appendText(txt);        
 	}
 	else {
-		QString intro = QString("<span style=\"color: %1\">").arg(color) + QString("[%1] &lt;").arg(timestr) + whoNick(local) + QString("&gt;</span>");
-		if (subjectLine.isEmpty()) {
+        QString intro = QString("<span style=\"color: %1\">").arg(color) + QString("[%1] &lt;").arg(timestr) + whoNick(local).replace("\\40","@") + QString("&gt;</span>");
+		if (subjectLine.isEmpty()) {            
 			chatView()->appendText(intro + " " + txt);
-		} else {
+        } else {
 			chatView()->appendText(intro);
 			chatView()->appendText(subjectLine);
 			chatView()->appendText(txt);
