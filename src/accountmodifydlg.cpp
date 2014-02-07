@@ -687,7 +687,7 @@ void AccountModifyDlg::generateToken()
         stringToken = QCA::Hex().arrayToString(randomBytes).toAscii().data();
         le_pass->setText(stringToken);
         QString hostName = QHostInfo::localHostName();
-        lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "?token="+stringToken+"&application=mconf-chat-desktop@"+hostName+"\"> Click here to validate this application</a>");
+        lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "?token="+stringToken+"&application=mconf-chat-desktop@"+hostName+"\"> Click here to allow this application to access your account</a>");
 
     }else {
 
