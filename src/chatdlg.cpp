@@ -114,7 +114,7 @@ ChatDlg::ChatDlg(const Jid& jid, PsiAccount* pa, TabManager* tabManager)
 
 void ChatDlg::init()
 {
-	initUi();
+	initUi();    
 	initActions();
 	setShortcuts();
 
@@ -131,7 +131,9 @@ void ChatDlg::init()
 	connect(this, SIGNAL(composing(bool)), SLOT(updateIsComposing(bool)));
 
 	setAcceptDrops(true);
-	updateContact(jid(), true);
+
+    updateContact(jid(), true);
+
 
 	X11WM_CLASS("chat");
 	setLooks();
@@ -440,10 +442,13 @@ void ChatDlg::updateContact(const Jid &j, bool fromPresence)
 			statusString_ = userStatus.status;
 		}
 
-		contactUpdated(userStatus.userListItem, userStatus.statusType, userStatus.status);
+        contactUpdated(userStatus.userListItem, userStatus.statusType, userStatus.status);
 
-		if (userStatus.userListItem) {
-			dispNick_ = JIDUtil::nickOrJid(userStatus.userListItem->name(), userStatus.userListItem->jid().full());
+        if (userStatus.userListItem) {
+
+            QString tempJid = userStatus.userListItem->jid().full();
+            QString tempName = userStatus.userListItem->name();
+            dispNick_ = JIDUtil::nickOrJid(tempName.replace("\\40","@"), tempJid.replace("\\40","@"));
 			nicksChanged();
 			invalidateTab();
 
