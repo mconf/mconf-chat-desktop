@@ -218,7 +218,7 @@ void OptionsTabSound::soundReset()
 	d->le_oeMessage->setText("sound/chat2.wav");
 	d->le_oeChat1->setText("sound/chat1.wav");
 	d->le_oeChat2->setText("sound/chat2.wav");
-    d->le_oeGroupChat->setText("sound/chat2.wav");x
+    d->le_oeGroupChat->setText("sound/chat2.wav");
 	d->le_oeSystem->setText("sound/chat2.wav");
 	d->le_oeHeadline->setText("sound/chat2.wav");
 	d->le_oeOnline->setText("sound/online.wav");
