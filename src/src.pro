@@ -101,7 +101,7 @@ TRANSLATIONS = \
 	$$LANG_PATH/mk/psi_mk.ts \
 	#$$LANG_PATH/nl/psi_nl.ts \
 	$$LANG_PATH/pl/psi_pl.ts \
-	#$$LANG_PATH/pt/psi_pt.ts \
+        #$$LANG_PATH/pt/psi_pt.ts \
 	$$LANG_PATH/pt_BR/psi_pt_BR.ts \
 	$$LANG_PATH/ru/psi_ru.ts \
 	#$$LANG_PATH/se/psi_se.ts \

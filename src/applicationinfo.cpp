@@ -39,7 +39,7 @@
 // PROG_SNAME - read as small name, system name, soname, short name, fs name
 
 #define PROG_NAME "Mconf-Chat"
-#define PROG_SNAME "mconf-chat"
+#define PROG_SNAME "mconf-chat-desktop"
 #define PROG_VERSION PSI_VERSION
 //#define PROG_VERSION "0.15-dev" " (" __DATE__ ")" //CVS Builds are dated
 //#define PROG_VERSION "0.15";
@@ -56,7 +56,11 @@
 #endif
 
 #if defined(HAVE_X11) && !defined(PSI_DATADIR)
-#define PSI_DATADIR "/usr/local/share/psi"
+#define PSI_DATADIR "/usr/local/share/mconf-chat-desktop"
+#endif
+
+#if defined(HAVE_X11) && !defined(PSI_LINUXDIR)
+#define PSI_LINUXDIR "/usr/share/mconf-chat-desktop"
 #endif
 
 
@@ -146,6 +150,7 @@ QString ApplicationInfo::resourcesDir()
 	// FIXME: Clean this up (remko)
 	// System routine locates resource files. We "know" that Psi.icns is
 	// in the Resources directory.
+
 	QString resourcePath;
 	CFBundleRef mainBundle = CFBundleGetMainBundle();
 	CFStringRef resourceCFStringRef = CFStringCreateWithCString(NULL,
@@ -182,6 +187,19 @@ QString ApplicationInfo::resourcesDir()
 #endif
 }
 
+QString ApplicationInfo::appDir()
+{
+#if defined(HAVE_X11)
+    return PSI_LINUXDIR;
+#elif defined(Q_OS_WIN)
+    return QDir::currentPath();
+#elif defined(Q_OS_MAC)
+    //TODO:
+    return "";
+#endif
+
+}
+
 QString ApplicationInfo::libDir()
 {
 #if defined(Q_OS_UNIX)
@@ -201,27 +219,27 @@ QString ApplicationInfo::homeDir(ApplicationInfo::HomedirType type)
 	static QString dataDir_;
 	static QString cacheDir_;
 
-	if (configDir_.isEmpty()) {
+	if (configDir_.isEmpty()) {        
 		// Try the environment override first
-		configDir_ = QString::fromLocal8Bit(getenv("PSIDATADIR"));
+        configDir_ = QString::fromLocal8Bit(getenv("PSIDATADIR"));
 
 		if (configDir_.isEmpty()) {
 #if defined Q_OS_WIN
 			QString base = QFileInfo(QCoreApplication::applicationFilePath()).fileName()
 					.toLower().indexOf("portable") == -1?
 						"" : QCoreApplication::applicationDirPath();
-			if (base.isEmpty()) {
+			if (base.isEmpty()) {                
 				wchar_t path[MAX_PATH];
 				if (SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, 0, path) == S_OK) {
 					configDir_ = QString::fromWCharArray(path) + "\\" + name();
 				} else {
 					configDir_ = QDir::homePath() + "/" + name();
-				}
-				dataDir_ = configDir_;
+				}                
+				dataDir_ = configDir_;                
 				// prefer non-roaming data location for cache which is default for qds:DataLocation
 				cacheDir_ = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 			} else {
-				configDir_ = dataDir_ = cacheDir_ = base + "/" + name();
+				configDir_ = dataDir_ = cacheDir_ = base + "/" + name();                
 			}
 			// temporary store for later processing
 			QDir configDir(configDir_);
@@ -231,7 +249,7 @@ QString ApplicationInfo::homeDir(ApplicationInfo::HomedirType type)
 			QDir configDir(QDir::homePath() + "/Library/Application Support/" + name());
 			QDir cacheDir(QDir::homePath() + "/Library/Caches/" + name());
 			QDir dataDir(configDir);
-#elif defined HAVE_X11
+#elif defined HAVE_X11            
 			QString XdgConfigHome = QString::fromLocal8Bit(getenv("XDG_CONFIG_HOME"));
 			QString XdgDataHome = QString::fromLocal8Bit(getenv("XDG_DATA_HOME"));
 			QString XdgCacheHome = QString::fromLocal8Bit(getenv("XDG_CACHE_HOME"));

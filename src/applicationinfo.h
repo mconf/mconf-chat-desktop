@@ -29,6 +29,7 @@ public:
 	static QString homeDir(HomedirType type);
 	static QString resourcesDir();
 	static QString libDir();
+    static QString appDir();
 	static QString profilesDir(ApplicationInfo::HomedirType);
 	static QString currentProfileDir(HomedirType type);
 	static QString makeSubhomePath(const QString &, HomedirType type);

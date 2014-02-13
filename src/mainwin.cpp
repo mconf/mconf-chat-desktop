@@ -432,8 +432,8 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon* psi)
 	if (!PsiOptions::instance()->getOption("options.ui.contactlist.show-menubar").toBool())  {
 		mainMenuBar()->hide();
 	}
-	//else
-	//	mainMenuBar()->show();
+    //else
+    //	mainMenuBar()->show();
 #endif
 	d->optionsButton->setMenu( d->optionsMenu );
 	d->statusButton->setMenu( d->statusMenu );

@@ -17,4 +17,8 @@ SUBDIRS += \
 OTHER_FILES += options/default.xml \
 	options/macosx.xml \
 	options/newprofile.xml \
-	options/windows.xml
+        options/windows.xml \
+        options/psi_pt_BR.qm \
+        options/psi_es.qm \
+        options/psi_es_ES.qm
+

@@ -23,6 +23,7 @@
 #include <QFile>
 #include <QDir>
 #include <QLibraryInfo>
+#include <QMessageBox>
 
 #include "translationmanager.h"
 #include "applicationinfo.h"
@@ -172,13 +173,15 @@ VarList TranslationManager::availableTranslations()
 QStringList TranslationManager::translationDirs() const
 {
 	QStringList dirs;
-	dirs += ".";
-	dirs += ApplicationInfo::homeDir(ApplicationInfo::DataLocation);
-	dirs += ApplicationInfo::resourcesDir();
-	QString subdir = "/translations";
+    dirs += ".";
+    dirs += ApplicationInfo::homeDir(ApplicationInfo::DataLocation);
+    dirs += ApplicationInfo::resourcesDir();
+    QString subdir = "/translations";
 	dirs += "." + subdir;
 	dirs += ApplicationInfo::homeDir(ApplicationInfo::DataLocation) + subdir;
-	dirs += ApplicationInfo::resourcesDir() + subdir;
+    dirs += ApplicationInfo::resourcesDir() + subdir;
+    dirs += ApplicationInfo::appDir() + subdir;
+
 	return dirs;
 }
 

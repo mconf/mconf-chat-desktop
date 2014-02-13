@@ -199,10 +199,10 @@ void PsiActionList::Private::createMainWin()
 //
 //		IconAction *actOnlineHelp = new IconAction (tr("User Guide (Online)"), tr("User Guide (Online)"), 0, this);
 //		actOnlineHelp->setWhatsThis (tr("User Guide (Online)"));
-//		
+//
 //		IconAction *actOnlineWiki = new IconAction (tr("Wiki (Online)"), tr("Wiki (Online)"), 0, this);
 //		actOnlineWiki->setWhatsThis (tr("Wiki (Online)"));
-//		
+//
 //		IconAction *actOnlineHome = new IconAction (tr("Home Page (Online)"), tr("Home Page (Online)"), 0, this);
 //		actOnlineHome->setWhatsThis (tr("Home Page (Online)"));
 //
@@ -213,7 +213,7 @@ void PsiActionList::Private::createMainWin()
 //		IconAction *actJoinGroupchat = new IconAction (tr("Join Groupchat"), "psi/groupChat", tr("Join &Groupchat"), 0, this);
 		IconAction *actAccountSetup = new IconAction (tr("Account Setup"), "psi/account", tr("Acc&ount Setup"), 0, this);
 
-		IconAction *actOptions = new IconAction (tr("Options"), "psi/options", tr("&Options"), 0, this);
+        IconAction *actOptions = new IconAction (tr("Options"), "psi/options", tr("&Options"), 0, this);
 		actOptions->setMenuRole(QAction::PreferencesRole);
 
 		IconAction *actToolbars = new IconAction(tr("Configure Toolbars"), "psi/toolbars", tr("Configure Tool&bars"), 0, this);
