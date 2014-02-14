@@ -1,0 +1,12 @@
+Package: mconf-chat-desktop
+Version: 0.1
+Section: utils
+Priority: optional
+Architecture: amd64
+Installed-size: 8448 
+Depends: libqt4-core, libqca2,libqca2-plugin-ossl, libqca2-plugin-gnupg,zlib-bin, libc6-dev
+Maintainer: Mario Junior <mariogasparoni@mconf.org> 
+Description: Mconf's desktop chat client
+ This program is an instant messaging client that
+ integrates with Mconf. See more about Mconf at http://mconf.org.
+ This program is a fork of Psi (http://psi-im.org)
