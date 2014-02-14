@@ -64,7 +64,7 @@ void ContactListUtil::removeContact(PsiContact* contact, QMimeData* _selection, 
 				msg = tr("This will permanently remove<br>"
 						 "%1"
 						 "<br>from your contact list."
-						).arg(contactNames.join(", "));
+                         ).arg(contactNames.join(", ").replace("\\40","@"));
 			}
 
 #ifdef YAPSI
@@ -140,7 +140,7 @@ void ContactListUtil::removeContact(PsiContact* contact, QMimeData* _selection, 
 				if (psiContact && !psiContact->inList() && psiContact->blockAvailable()) {
 					msg = tr("This will permanently remove %1 from your contact list. "
 							 "You could block it in order to avoid further messages.")
-						  .arg(contactNames.join(", "));
+                            .arg(contactNames.join(", ").replace("\\40","@"));
 					destructiveActionName = tr("Delete");
 					complimentaryActionName = tr("Block");
 					complimentaryActionSlot = "blockContactConfirmation";

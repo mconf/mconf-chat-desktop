@@ -193,6 +193,7 @@ private:
 	QStringList stringToList(const QString &, bool enc=true) const;
 	QString findJidInString(const QString &) const;
 	QString expandAddresses(const QString &, bool enc=true) const;
+    QString escapeAt(QString jid);
 	void buildCompletionList();
 	void setAccount(PsiAccount *);
 	void setTime(const QDateTime &, bool late=false);

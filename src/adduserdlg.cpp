@@ -182,8 +182,10 @@ void AddUserDlg::ok()
 	}
 
 	add(jid(), le_nick->text(), list, ck_authreq->isChecked());
+    QString tempJid = jid().full();
+    tempJid = tempJid.replace("\\40","@");
 
-	QMessageBox::information(this, tr("Add User: Success"), tr("Added %1 to your roster.").arg(jid().full()));
+    QMessageBox::information(this, tr("Add User: Success"), tr("Added %1 to your roster.").arg(tempJid));
 	le_jid->setText("");
 	le_nick->setText("");
 	if(ck_close->isChecked()) {

@@ -2,7 +2,7 @@
 /conf.log
 /conf.pri
 /tmtags
-/psi
+/mconf-chat
 ._*
 .DS_Store
 .AppleDouble
@@ -38,8 +38,8 @@ src/_ui
 src/Makefile
 src/config.h
 src/psi.app
-src/psi
-src/psi.debug
+src/mconf-chat
+src/mconf-chat.debug
 src/capabilities/unittest/Makefile
 src/unittest/Makefile
 src/utilities/unittest/Makefile
@@ -57,5 +57,6 @@ checker
 /mac/disk
 /mac/Info.plist
 /psi.debug
-
+mconf-chat
+mconf-chat.debug
 

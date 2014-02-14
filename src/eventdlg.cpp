@@ -700,7 +700,7 @@ void EventDlg::init()
 	d->enc = false;
 	d->transid = -1;
 
-	if(d->composing) {
+    if(d->composing) {
 		d->lb_ident = 0;
 		d->cb_ident = d->psi->accountsComboBox(this);
 		connect(d->cb_ident, SIGNAL(activated(PsiAccount *)), SLOT(updateIdentity(PsiAccount *)));
@@ -742,7 +742,7 @@ void EventDlg::init()
 		hb2->addWidget(d->lb_status);
 		d->le_from = new QLineEdit(this);
 		d->le_from->setReadOnly(true);
-		hb2->addWidget(d->le_from);
+        hb2->addWidget(d->le_from);
 	}
 
 	if(d->composing) {
@@ -1006,7 +1006,7 @@ void EventDlg::init()
 	//ShortcutManager::connect("common.close", this, SLOT(close()));
 	ShortcutManager::connect("common.user-info", this, SLOT(doInfo()));
 	ShortcutManager::connect("common.history", this, SLOT(doHistory()));
-	//ShortcutManager::connect("message.send", this, SLOT(doSend()));
+    //ShortcutManager::connect("message.send", this, SLOT(doSend()));
 }
 
 bool EventDlg::messagingEnabled()
@@ -1298,7 +1298,7 @@ void EventDlg::doWhois(bool force)
 			return;
 	}
 	else {
-		str = d->le_from->text();
+        str = escapeAt(d->le_from->text());
 	}
 
 	//printf("whois: [%s]\n", str.latin1());
@@ -1505,7 +1505,7 @@ void EventDlg::doReadNext()
 
 void EventDlg::doChat()
 {
-	QStringList list = stringToList(d->le_from->text());
+    QStringList list = stringToList(escapeAt(d->le_from->text()));
 	if(list.isEmpty())
 		return;
 
@@ -1515,7 +1515,7 @@ void EventDlg::doChat()
 
 void EventDlg::doReply()
 {
-	QStringList list = stringToList(d->le_from->text());
+    QStringList list = stringToList(escapeAt(d->le_from->text()));
 	if(list.isEmpty())
 		return;
 	Jid j(list[0]);
@@ -1524,7 +1524,7 @@ void EventDlg::doReply()
 
 void EventDlg::doQuote()
 {
-	QStringList list = stringToList(d->le_from->text());
+    QStringList list = stringToList(escapeAt(d->le_from->text()));
 	if(list.isEmpty())
 		return;
 	Jid j(list[0]);
@@ -1539,7 +1539,7 @@ void EventDlg::doDeny()
 		return;
 
 	if (d->rosterExchangeItems.isEmpty()) {
-		QStringList list = stringToList(d->le_from->text());
+        QStringList list = stringToList(escapeAt(d->le_from->text()));
 		if(list.isEmpty())
 			return;
 		Jid j(list[0]);
@@ -1557,7 +1557,10 @@ void EventDlg::doAuth()
 		return;
 
 	if (d->rosterExchangeItems.isEmpty()) {
-        QStringList list = stringToList(d->le_from->text());
+
+        QStringList list;
+
+        list=stringToList(escapeAt(d->le_from->text()));
 
 		if(list.isEmpty())
 			return;
@@ -1570,6 +1573,17 @@ void EventDlg::doAuth()
 	}
 	d->pb_auth->setEnabled(false);
 	closeAfterReply();
+}
+
+QString EventDlg::escapeAt(QString jid){
+    QString tempJid;
+    int count = jid.count("@");
+    tempJid=jid;
+    if(count >= 2){
+        for(;count>1;count--)
+            tempJid=tempJid.replace(tempJid.indexOf("@"),1,"\\40");
+    }
+    return tempJid;
 }
 
 /*!
@@ -1608,7 +1622,7 @@ void EventDlg::doHttpDeny()
 	if(!d->pa->checkConnected(this))
 		return;
 
-	QStringList list = stringToList(d->le_from->text());
+    QStringList list = stringToList(escapeAt(d->le_from->text()));
 	if(list.isEmpty())
 		return;
 	Jid j(list[0]);
@@ -1627,7 +1641,7 @@ void EventDlg::doHttpDeny()
 void EventDlg::doFormSubmit()
 {
 	//get original sender
-	QStringList list = stringToList(d->le_from->text());
+    QStringList list = stringToList(escapeAt(d->le_from->text()));
 	if(list.isEmpty())
 		return;
 	Jid j(list[0]);
@@ -1658,7 +1672,7 @@ void EventDlg::doFormSubmit()
 void EventDlg::doFormCancel()
 {
 	//get original sender
-	QStringList list = stringToList(d->le_from->text());
+    QStringList list = stringToList(escapeAt(d->le_from->text()));
 	if(list.isEmpty())
 		return;
 	Jid j(list[0]);
@@ -1792,9 +1806,13 @@ void EventDlg::updateEvent(PsiEvent *e)
 	if(d->anim != oldanim)
 		setWindowIcon(d->anim->icon());
 
-    d->le_from->setText(expandAddresses(e->from().full(), false));
+    QString tempFrom;
+    tempFrom = e->from().full();
+    tempFrom = tempFrom.replace("\\40","@");
+
+    d->le_from->setText(expandAddresses(tempFrom, false));
 	d->le_from->setCursorPosition(0);
-	d->le_from->setToolTip(e->from().full());
+    d->le_from->setToolTip(tempFrom);
 	setTime(e->timeStamp(), e->late());
 
 	d->enc = false;
