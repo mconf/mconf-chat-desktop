@@ -1,0 +1,76 @@
+#Mconf Chat Desktop. 
+#Debian package script.
+
+#This script should be placed with the same path of 'mconf-chat-desktop' debian package folder.
+echo "Copying file, stripping debug symbols"
+
+#Change this path to your executable path
+objcopy ~/githubrepos/mconf-chat-desktop/mconf-chat ./mconf-chat-desktop/usr/bin/mconf-chat-desktop --strip-debug --strip-unneeded
+
+chmod 0755 mconf-chat-desktop/usr
+chmod 0755 mconf-chat-desktop/DEBIAN
+chmod 0755 mconf-chat-desktop/usr/bin
+chmod 0755 mconf-chat-desktop/usr/bin/mconf-chat-desktop
+chmod 0755 mconf-chat-desktop/usr/share
+chmod 0755 mconf-chat-desktop/usr/share/applications
+chmod 0644 mconf-chat-desktop/usr/share/applications/mconf-chat-desktop.desktop
+chmod 0755 mconf-chat-desktop/usr/share/icons
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/16x16
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/16x16/apps
+chmod 0644 mconf-chat-desktop/usr/share/icons/hicolor/16x16/apps/mconf-chat-desktop.png
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/32x32
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/32x32/apps
+chmod 0644 mconf-chat-desktop/usr/share/icons/hicolor/32x32/apps/mconf-chat-desktop.png
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/48x48
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/48x48/apps
+chmod 0644 mconf-chat-desktop/usr/share/icons/hicolor/48x48/apps/mconf-chat-desktop.png
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/64x64
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/64x64/apps
+chmod 0644 mconf-chat-desktop/usr/share/icons/hicolor/64x64/apps/mconf-chat-desktop.png
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/128x128
+chmod 0755 mconf-chat-desktop/usr/share/icons/hicolor/128x128/apps
+chmod 0644 mconf-chat-desktop/usr/share/icons/hicolor/128x128/apps/mconf-chat-desktop.png
+
+chmod 0755 mconf-chat-desktop/usr/share/man
+chmod 0755 mconf-chat-desktop/usr/share/man/man1
+chmod 0644 mconf-chat-desktop/usr/share/man/man1/mconf-chat-desktop.1.gz
+
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/translations
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/translations/*
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/certs
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/README
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/sound
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/sound/*
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/certs/*
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/*
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/emoticons
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/emoticons/default
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/emoticons/default/*
+
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/roster
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/roster/*
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/roster/default
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/roster/default/*
+
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/system
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/system/default
+
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/system/README
+ 
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/system/default/*
+
+chmod 0755 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/system/default/whiteboarding
+chmod 0644 mconf-chat-desktop/usr/share/mconf-chat-desktop/iconsets/system/default/whiteboarding/*
+
+sudo chown -R root:root mconf-chat-desktop/
+fakeroot dpkg-deb --build mconf-chat-desktop
+sudo chown -R `echo $USER`:`echo $USER` mconf-chat-desktop/
+mv mconf-chat-desktop.deb mconf-chat-desktop-i386.deb
+echo "lintian's check..."
+lintian mconf-chat-desktop-i386.deb
+
+
+
