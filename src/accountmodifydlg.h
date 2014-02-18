@@ -42,7 +42,7 @@ public:
 	AccountModifyDlg(PsiAccount *, QWidget *parent=0);
 	~AccountModifyDlg();
 
-	void setPassword(const QString &);
+    void setPassword(const QString &);
 	const UserAccount& account() const { return acc; }
 
 protected:

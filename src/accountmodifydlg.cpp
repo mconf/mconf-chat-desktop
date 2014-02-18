@@ -411,6 +411,7 @@ void AccountModifyDlg::setPassword(const QString &pw)
 		le_pass->setText(pw);
 }
 
+
 void AccountModifyDlg::sslActivated(int i)
 {
 	if ((cb_ssl->itemData(i) == UserAccount::SSL_Yes || cb_ssl->itemData(i) == UserAccount::SSL_Legacy) && !checkSSL()) {

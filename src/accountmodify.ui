@@ -34,7 +34,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_account">
       <attribute name="title">
@@ -352,9 +352,16 @@
        <item>
         <widget class="QGroupBox" name="bg_meeting">
          <property name="title">
-          <string>Meeting</string>
+          <string>Conference Options</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Insert the URL of your conference room&lt;br&gt;(example: http://www.server.com/webconf/john)</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLineEdit" name="le_meeting">
             <property name="enabled">

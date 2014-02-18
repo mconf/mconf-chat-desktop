@@ -42,6 +42,7 @@
 #include "textutil.h"
 #include "xmpp_tasks.h"
 #include "lastactivitytask.h"
+#include "accountmodifydlg.h"
 
 
 #define MCMDCHAT		"http://psi-im.org/ids/mcmd#chatmain"
@@ -686,6 +687,7 @@ void PsiChatDlg::on_pb_invite_clicked(){
     //    TODO: store current data and retrive it later
     QString meeting = "";
     meeting = psiAccount->accountOptions().meeting;
+
     if (!meeting.isEmpty()){
         chatEdit()->setText(meeting);
         ChatDlg::doSend();
@@ -693,6 +695,20 @@ void PsiChatDlg::on_pb_invite_clicked(){
     else{
         QWidget* popupWidget = new QWidget();
         popupWidget->setWindowFlags(Qt::Popup);
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Conference Options");
+        msgBox.setText("Conference options are empty. <br>Configure it now?");
+        QIcon i = QIcon();
+        i.addPixmap(QPixmap("://iconsets/system/default/jabber.png"));
+        msgBox.setWindowIcon(i);
+        msgBox.setStandardButtons(QMessageBox::No);
+        msgBox.addButton(QMessageBox::Yes);
+        AccountModifyDlg *amd = new AccountModifyDlg(psiAccount,0);
+        if(msgBox.exec() == QMessageBox::Yes){
+            amd->exec();
+        }else {
+            //do nothing
+        }
     }
 }
 
