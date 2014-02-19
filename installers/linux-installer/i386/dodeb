@@ -71,6 +71,3 @@ sudo chown -R `echo $USER`:`echo $USER` mconf-chat-desktop/
 mv mconf-chat-desktop.deb mconf-chat-desktop-i386.deb
 echo "lintian's check..."
 lintian mconf-chat-desktop-i386.deb
-
-
-

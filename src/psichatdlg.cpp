@@ -696,8 +696,8 @@ void PsiChatDlg::on_pb_invite_clicked(){
         QWidget* popupWidget = new QWidget();
         popupWidget->setWindowFlags(Qt::Popup);
         QMessageBox msgBox;
-        msgBox.setWindowTitle("Conference Options");
-        msgBox.setText("Conference options are empty. <br>Configure it now?");
+        msgBox.setWindowTitle(tr("Conference Options"));
+        msgBox.setText(tr("Conference options are empty. <br>Configure it now?"));
         QIcon i = QIcon();
         i.addPixmap(QPixmap("://iconsets/system/default/jabber.png"));
         msgBox.setWindowIcon(i);

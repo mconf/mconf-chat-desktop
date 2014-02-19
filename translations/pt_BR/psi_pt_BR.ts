@@ -10560,7 +10560,7 @@ Razão: %1.</translation>
 </context>
 <context>
     <name>PsiChatDlg</name>
-    <message>
+   <message>
         <location filename="../../psi/src/psichatdlg.cpp" line="699"/>
         <source>Conference Options</source>
         <translation>Configurações de Conferência</translation>

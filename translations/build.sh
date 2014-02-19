@@ -6,7 +6,7 @@ mkdir dist
 
 for lang in `cat langs`; do
 	cp $lang/psi_$lang.ts dist
-	cp $lang/psi_$lang.html dist
+#	cp $lang/psi_$lang.html dist
 
 	if [ -f $QTDIR/translations/qt_$lang.qm ]; then
 		cp $QTDIR/translations/qt_$lang.qm dist

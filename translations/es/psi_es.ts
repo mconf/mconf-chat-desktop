@@ -10540,6 +10540,16 @@ Motivo: %1.</translation>
 <context>
     <name>PsiChatDlg</name>
     <message>
+        <location filename="../../psi/src/psichatdlg.cpp" line="699"/>
+        <source>Conference Options</source>
+        <translation>Configuracionaes de Conferencia</translation>
+    </message>
+    <message>
+        <location filename="../../psi/src/psichatdlg.cpp" line="700"/>
+        <source>Conference options are empty. &lt;br&gt;Configure it now?</source>
+        <translation>No hay opciones de conferencia. &lt;br&gt;Configurar ahora?</translation>
+    </message>
+    <message>
         <source>Clear chat window</source>
         <translation type="obsolete">Borrar todo el texto de la ventana de charla</translation>
     </message>
