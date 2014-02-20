@@ -89,8 +89,9 @@ Section "Uninstall"
   DeleteRegKey HKLM SOFTWARE\mconf-chat-desktop
 
   ; Remove files and uninstaller
-  Delete $INSTDIR\mconf-chat-desktop.nsi
-  Delete $INSTDIR\uninstall.exe
+  RMDir /r "$INSTDIR"
+  
+
 
   ; Remove shortcuts, if any
   Delete "$SMPROGRAMS\mconf-chat-desktop\*.*"
