@@ -10561,6 +10561,11 @@ Razão: %1.</translation>
 <context>
     <name>PsiChatDlg</name>
    <message>
+        <location filename="../../psi/src/psichatdlg.cpp" line="692"/>
+        <source>I am inviting you to join my conference room here: </source>
+        <translation>Eu estou lhe convidando para entrar na minha sala de conferência aqui: </translation>
+    </message>
+   <message>
         <location filename="../../psi/src/psichatdlg.cpp" line="699"/>
         <source>Conference Options</source>
         <translation>Configurações de Conferência</translation>

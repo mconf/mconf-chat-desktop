@@ -689,7 +689,7 @@ void PsiChatDlg::on_pb_invite_clicked(){
     meeting = psiAccount->accountOptions().meeting;
 
     if (!meeting.isEmpty()){
-        chatEdit()->setText(meeting);
+        chatEdit()->setText(tr("I am inviting you to join my conference room here: ")+meeting);
         ChatDlg::doSend();
     }
     else{
