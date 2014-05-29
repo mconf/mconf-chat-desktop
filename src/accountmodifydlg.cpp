@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QHostInfo>
 
+
 #include "accountmodifydlg.h"
 #include "pgputil.h"
 #include "psiaccount.h"
@@ -34,6 +35,7 @@
 #include "privacydlg.h"
 #include "pgpkeydlg.h"
 #include "psicontactlist.h"
+
 
 AccountModifyDlg::AccountModifyDlg(PsiCon *_psi, QWidget *parent)
 :QDialog(parent)
@@ -485,6 +487,16 @@ void AccountModifyDlg::detailsChangePW()
 	}
 }
 
+
+void AccountModifyDlg::saveWizard(QString username, QString emailmconf, QString url, QString token)
+{
+    //le_name->setText(username);
+    le_jid->setText(emailmconf);
+    le_meeting->setText(url);
+    le_pass->setText(token);
+    save();
+}
+
 void AccountModifyDlg::save()
 {
 	/*if(pa && le_name->text().isEmpty()) {
@@ -669,7 +681,6 @@ void AccountModifyDlg::updateBlockedContacts(const PrivacyList& l)
 	setPrivacyTabEnabled(true);
 }
 
-
 void AccountModifyDlg::generateToken()
 {
     QMessageBox msgBox;
@@ -681,11 +692,7 @@ void AccountModifyDlg::generateToken()
     msgBox.setStandardButtons(QMessageBox::No);
     msgBox.addButton(QMessageBox::Yes);
     if(msgBox.exec() == QMessageBox::Yes){
-        int tokenLength = 8;
-        QCA::SecureArray randomBytes(tokenLength);
-        QString stringToken;
-        randomBytes=QCA::Random::randomArray(tokenLength);
-        stringToken = QCA::Hex().arrayToString(randomBytes).toAscii().data();
+        QString stringToken = token::calcToken();
         le_pass->setText(stringToken);
         QString hostName = QHostInfo::localHostName();
         lb_discover_token->setText("<a href=\"" + PsiOptions::instance()->getOption("options.account.discover-token").toString() + "?token="+stringToken+"&application=mconf-chat-desktop@"+hostName+"\"> Click here to allow this application to access your account</a>");
@@ -697,7 +704,6 @@ void AccountModifyDlg::generateToken()
 
 }
 
-
 QString AccountModifyDlg::encodeAtChar(QString s){
     s.replace("@","\\40");
     return s;
@@ -707,7 +713,6 @@ QString AccountModifyDlg::decodeAtChar(QString s){
     s.replace("\\40","@");
     return s;
 }
-
 
 void AccountModifyDlg::changeList_error()
 {

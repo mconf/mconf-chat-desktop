@@ -24,6 +24,8 @@
 #include <QDialog>
 #include <QtCrypto>
 
+
+#include "token.h"
 #include "privacylistmodel.h"
 #include "privacylistblockedmodel.h"
 #include "ui_accountmodify.h"
@@ -56,6 +58,7 @@ private slots:
 	void detailsVCard();
 	void detailsChangePW();
 
+
 	void save();
 
 	//void pgpToggled(bool);
@@ -75,7 +78,8 @@ private slots:
     QString decodeAtChar(QString s);
  	void getDefaultList_error();
  	void changeList_error();
-
+public slots:
+    void saveWizard(QString username, QString emailmconf, QString url, QString token);
 private:
 	PsiCon *psi;
 	PsiAccount *pa;

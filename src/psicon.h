@@ -28,6 +28,7 @@
 #include "psievent.h"
 #include "tabbablewidget.h"
 #include "tunecontrollermanager.h"
+#include "wizard.h"
 
 using namespace XMPP;
 
@@ -125,6 +126,15 @@ public:
 
 	bool haveAutoUpdater() const;
 
+    //wizard data.
+    wizard *wz;
+    QString wzUsername;
+    QString wzEmailmconf;
+    QString wzUrl;
+    QString wzToken;
+
+
+
 signals:
 	void quit(int);
 	void accountAdded(PsiAccount *);
@@ -134,6 +144,9 @@ signals:
 	void accountActivityChanged();
 	void emitOptionsUpdate();
 	void restoringSavedChatsChanged();
+    //wizard
+    void wizardDone(QString username, QString emailmconf, QString url, QString token);
+
 
 public slots:
 	void setGlobalStatus(const Status &, bool withPriority = false, bool isManualStatus = false);
@@ -164,6 +177,8 @@ public slots:
 	void openUri(const QUrl &uri);
 	void openAtStyleUri(const QUrl &uri);
 	void raiseMainwin();
+    //wizard slots
+    void slotAccepted();
 
 private slots:
 	void saveAccounts();

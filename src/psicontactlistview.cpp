@@ -174,7 +174,7 @@ PsiContactListViewDelegate* PsiContactListView::itemDelegate() const
 void PsiContactListView::showToolTip(const QModelIndex& index, const QPoint& globalPos) const
 {
 	Q_UNUSED(globalPos);
-	QString text = index.data(Qt::ToolTipRole).toString();
+    QString text = index.data(Qt::ToolTipRole).toString().replace("\\40","@");
 	PsiToolTip::showText(globalPos, text, this);
 }
 

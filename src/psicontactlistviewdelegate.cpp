@@ -288,7 +288,7 @@ void PsiContactListViewDelegate::drawAccount(QPainter* painter, const QStyleOpti
 
 	r.setLeft(avatarRect.right() + 3);
 
-	QString text = nameText(o, index);
+    QString text = nameText(o, index);
 
 	r.setRight(r.left() + o.fontMetrics.width(text));
 	drawText(painter, o, r, text, index);

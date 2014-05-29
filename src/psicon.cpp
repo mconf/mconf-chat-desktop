@@ -35,6 +35,7 @@
 #include <QMessageBox>
 #include <QDir>
 
+
 #include "s5b.h"
 #include "psiaccount.h"
 #include "activeprofiles.h"
@@ -103,6 +104,7 @@
 #include "avcall/calldlg.h"
 #include "alertmanager.h"
 #include "bosskey.h"
+
 
 #include "AutoUpdater/AutoUpdater.h"
 #ifdef HAVE_SPARKLE
@@ -829,7 +831,7 @@ void PsiCon::doManageAccounts()
 			account->modify();
 		}
 		else {
-			promptUserToCreateAccount();
+            promptUserToCreateAccount();
 		}
 	}
 }
@@ -1172,7 +1174,7 @@ void PsiCon::checkAccountsEmpty()
 {
 	if (d->contactList->accounts().count() == 0) {
 #ifndef YAPSI
-		promptUserToCreateAccount();
+        promptUserToCreateAccount();
 #endif
 	}
 }
@@ -1725,8 +1727,26 @@ PsiActionList *PsiCon::actionList() const
  */
 void PsiCon::promptUserToCreateAccount()
 {
-    AccountModifyDlg w(this);
-    w.exec();
+    AccountModifyDlg *w = new AccountModifyDlg(this);
+    //AccountModifyDlg w(this);
+    //w.exec();
+
+    //Start Wizard
+    wz = new wizard();
+    connect(wz,SIGNAL(accepted()),this,SLOT(slotAccepted()));
+    connect(this,SIGNAL(wizardDone(QString,QString,QString,QString)),w,SLOT(saveWizard(QString,QString,QString,QString)));
+    wz->show();
+}
+
+void PsiCon:: slotAccepted()
+{
+
+    this->wzUsername = wz->getUsername();
+    this->wzEmailmconf = wz->getEmailMconf();
+    this->wzUrl = wz->getUrl();
+    this->wzToken = wz->pageActivation->getToken();
+    emit wizardDone(this->wzUsername,this->wzEmailmconf,this->wzUrl,this->wzToken);
+
 }
 
 QString PsiCon::optionsFile() const

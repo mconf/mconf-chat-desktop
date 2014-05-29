@@ -190,11 +190,15 @@ HEADERS += \
 	$$PWD/bookmarkmanagedlg.h \
 	$$PWD/vcardphotodlg.h \
 	$$PWD/psicli.h \
-	$$PWD/coloropt.h
+	$$PWD/coloropt.h \
+    wizard.h \
+    token.h
 
 
 HEADERS += tabcompletion.h
-SOURCES += tabcompletion.cpp
+SOURCES += tabcompletion.cpp \
+    wizard.cpp \
+    token.cpp
 
 HEADERS += alertmanager.h
 SOURCES += alertmanager.cpp
@@ -540,7 +544,8 @@ FORMS += \
 	$$PWD/chatdlg.ui \
 	$$PWD/bookmarkmanage.ui \
 	$$PWD/ahcommanddlg.ui \
-	$$PWD/ahcformdlg.ui
+	$$PWD/ahcformdlg.ui \
+        $$PWD/wizard.ui
 
 # options dialog
 include($$PWD/options/options.pri)

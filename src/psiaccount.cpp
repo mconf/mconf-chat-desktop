@@ -825,8 +825,8 @@ public slots:
 	{
 		AccountModifyDlg *w = account->findDialog<AccountModifyDlg*>();
 		if(!w) {
-			w = new AccountModifyDlg(account, 0);
-			w->show();
+            w = new AccountModifyDlg(account, 0);
+            w->show();
 		}
 
 		bringToFront(w);
