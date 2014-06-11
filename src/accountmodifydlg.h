@@ -60,6 +60,7 @@ private slots:
 
 
 	void save();
+    QString fixUrl(QString url);
 
 	//void pgpToggled(bool);
 	void chooseKey();
@@ -79,7 +80,7 @@ private slots:
  	void getDefaultList_error();
  	void changeList_error();
 public slots:
-    void saveWizard(QString username, QString emailmconf, QString url, QString token);
+    void saveWizard(QString emailmconf, QString url, QString token);
 private:
 	PsiCon *psi;
 	PsiAccount *pa;
@@ -90,7 +91,7 @@ private:
 	// Privacy
  	PrivacyListModel privacyModel;
  	PrivacyListBlockedModel privacyBlockedModel;
- 	bool privacyInitialized;
+    bool privacyInitialized;
 
 	void updateUserID();
 	void setKeyID(bool b, const QString &s="");

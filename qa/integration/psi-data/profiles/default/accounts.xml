@@ -11,7 +11,7 @@
     <authid type="QString"></authid>
     <realm type="QString"></realm>
    </custom-auth>
-   <log type="bool">true</log>
+   <log type="bool">false</log>
    <stun-password type="QString"></stun-password>
    <use-host type="bool">false</use-host>
    <stun-port type="QString">3478</stun-port>

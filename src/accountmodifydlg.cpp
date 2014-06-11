@@ -487,14 +487,32 @@ void AccountModifyDlg::detailsChangePW()
 	}
 }
 
+QString AccountModifyDlg::fixUrl(QString url){
 
-void AccountModifyDlg::saveWizard(QString username, QString emailmconf, QString url, QString token)
+    QString newUrl;
+    QRegExp regExp("^(((http|https)://)|www\.)");
+
+    if(url.isEmpty()) return url;
+
+    if (url.contains(regExp))
+        newUrl=url;
+    else
+        newUrl=url.prepend("http://");
+
+    return newUrl;
+}
+
+void AccountModifyDlg::saveWizard(QString emailmconf, QString url, QString token)
 {
-    //le_name->setText(username);
+
+    pa = psi->contactList()->defaultAccount();
     le_jid->setText(emailmconf);
     le_meeting->setText(url);
     le_pass->setText(token);
+
     save();
+
+    this->destroy();
 }
 
 void AccountModifyDlg::save()
@@ -504,12 +522,12 @@ void AccountModifyDlg::save()
 		return;
 	}*/
 
+    le_name->setText("Mensajeria-Redclara");
     QString emailmconf_t = le_jid->text().trimmed();
     QString tempJid = encodeAtChar(emailmconf_t);
     le_jid->setText(tempJid);
 
-    Jid newJid( JIDUtil::accountFromString(tempJid));
-    //Jid newJid( JIDUtil::accountFromString(tempJid));
+    Jid newJid( JIDUtil::accountFromString(tempJid));    
 
     if ( newJid.node().isEmpty() || newJid.domain().isEmpty() ) {
         if (PsiOptions::instance()->getOption("options.account.domain").toString().isEmpty()) {
@@ -537,7 +555,7 @@ void AccountModifyDlg::save()
 		n--;
 
 	if ( n )
-		aname = def + '_' + QString::number(++n);
+        aname = def + '_' + QString::number(++n);
 	le_name->setText( aname );
 
     acc.name = le_name->text();
@@ -577,7 +595,7 @@ void AccountModifyDlg::save()
 
 	acc.pgpSecretKey = key;
 
-    acc.meeting = le_meeting->text().trimmed();
+    acc.meeting = fixUrl(le_meeting->text().trimmed());
 
 	acc.proxyID = pc->currentItem();
 

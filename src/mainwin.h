@@ -87,6 +87,7 @@ signals:
 	void doOptions();
 	void doToolbars();
 	void doManageAccounts();
+    void doWizard();
 	void doGroupChat();
 	void doFileTransDlg();
 	void accountInfo();

@@ -4,22 +4,26 @@
 #include <QWizard>
 #include <QtGui>
 #include <QString>
+#include "accountmodifydlg.h"
+#include "psioptions.h"
 #include "token.h"
+#include "psiaccount.h"
 
-class EmailPage: public QWizardPage{
+class UsernamePage: public QWizardPage{
     Q_OBJECT
 public:
-    EmailPage();
-
+    UsernamePage(const UserAccount *_acc);
+    const UserAccount *acc;
     void registerFields();
-    QLineEdit *emailLineEdit;
+    QLineEdit *emailLineEdit;    
+    bool isComplete() const; //overriding isComplete
 };
 
 class UrlPage: public QWizardPage{
     Q_OBJECT
 public:
-    UrlPage();
-
+    UrlPage(const UserAccount *_acc);
+    const UserAccount *acc;
     void registerFields();
     QLineEdit *urlLineEdit;
 };
@@ -45,8 +49,9 @@ class wizard: public QWizard
 {
     Q_OBJECT
 public:
-    wizard();
+    wizard(const UserAccount * _acc);
 
+    const UserAccount * acc;
     QWizardPage *createIntroPage();
     QWizardPage *createConclusionPage();
     QWizardPage * lastPage();
@@ -56,7 +61,7 @@ public:
     QString  getEmailMconf();
     QString  getUrl();
 
-    EmailPage * pageEmailRegistration;
+    UsernamePage * pageEmailRegistration;
     UrlPage * pageUrlRegistration;
     ActivationPage * pageActivation;
 

@@ -6,7 +6,7 @@
     <message>
         <source>Account setup</source>
         <translation type="obsolete">Configurações da conta</translation>
-    </message>
+    </message>      
     <message>
         <source>Register new account</source>
         <translation type="obsolete">Registrar nova conta</translation>
@@ -10133,6 +10133,11 @@ Razão: %1.</translation>
         <translation>Configurações da conta</translation>
     </message>
     <message>
+    	<location filename="../../psi/src/psiactionlist.cpp" line="215"/>
+        <source>Run &amp;Wizard</source>
+        <translation >Executar &amp;Assistente</translation>
+    </message>  
+    <message>
         <location filename="../../psi/src/psiactionlist.cpp" line="289"/>
         <source>Away</source>
         <translation>Ausente</translation>
@@ -14977,5 +14982,90 @@ ou digite sua própria. Senão deixe o campo vazio.</translation>
         <source>You have entered malformed XML input. Are you sure you want to send this ?</source>
         <translation>Você informou um XML mal formado. Realmente deseja enviá-lo?</translation>
     </message>
+</context>
+<context>
+	<name>wizard</name>	
+	<message>
+        <location filename="../../psi/src/wizard.cpp" line="143"/>
+        <source>Introduction</source>
+        <translation>Introdução</translation>
+    </message>
+	<message>
+        <location filename="../../psi/src/wizard.cpp" line="145"/>
+        <source>This wizard will help you register and activate your account.</source>
+        <translation>Este assistente irá ajudá-lo a registrar e ativar sua conta.</translation>
+    </message>
+    <message>
+        <location filename="../../psi/src/wizard.cpp" line="157"/>
+        <source>Conclusion</source>
+        <translation>Conclusão</translation>
+    </message>
+    <message>
+        <location filename="../../psi/src/wizard.cpp" line="159"/>
+        <source>Your account is now successfully configured! Make sure you activated your account.</source>
+        <translation>Sua conta já está configurada. Verifique se você ativou sua conta nas etapas anteriores.</translation>
+    </message>    
+
+	
+</context>
+<context>
+	<name>UsernamePage</name>
+	<message>
+        <location filename="../../psi/src/wizard.cpp" line="54"/>
+        <source>Registration (1/3)</source>
+        <translation>Registro (1/3)</translation>
+    </message>
+    <message>
+        <location filename="../../psi/src/wizard.cpp" line="55"/>
+        <source>Please type your username.</source>
+        <translation>Por favor, informe seu nome.</translation>
+    </message>
+     <message>
+        <location filename="../../psi/src/wizard.cpp" line="59"/>
+        <source>Username:</source>
+        <translation>Nome de usuário:</translation>
+    </message>
+</context>
+
+<context>
+	<name>UrlPage</name>
+	<message>
+        <location filename="../../psi/src/wizard.cpp" line="82"/>
+        <source>Registration (2/3)</source>
+        <translation>Registro (2/3)</translation>
+    </message>
+    <message>
+        <location filename="../../psi/src/wizard.cpp" line="83"/>
+        <source>Please type the URL of your conference room.</source>
+        <translation>Por favor, informe a URL da sua sala de conferência.</translation>
+    </message>
+</context>
+
+<context>
+	<name>ActivationPage</name>
+	<message>
+        <location filename="../../psi/src/wizard.cpp" line="104"/>
+        <source>Activation (3/3)</source>
+        <translation>Ativação (3/3)</translation>
+    </message>
+    
+     <message>
+        <location filename="../../psi/src/wizard.cpp" line="104"/>
+        <source>Click on the link below. You will be redirected to the website to activate your account.</source>
+        <translation>Clique no link abaixo para ser redirecionado ao website de ativação da sua conta.</translation>
+    </message>
+
+	<message>
+        <location filename="../../psi/src/wizard.cpp" line="116"/>
+        <source>Activate account</source>
+        <translation>Ativar conta</translation>
+    </message>
+
+    <message>
+        <location filename="../../psi/src/wizard.cpp" line="120"/>
+        <source>If you prefer, you can copy and paste the URL below in your browser.</source>
+        <translation>Se preferires, podes copiar e colar a URL abaixo em seu navegador.</translation>
+    </message>
+    
 </context>
 </TS>

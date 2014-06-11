@@ -47,36 +47,44 @@
 #include <QLibraryInfo>
 #include <QWizard>
 #include <QHostInfo>
-#include <accountmodifydlg.h>
-#include <psioptions.h>
 
-EmailPage::EmailPage(){
+UsernamePage::UsernamePage(const UserAccount *_acc){
+    acc = _acc;
 
-    this->setTitle("Registration (1/2)");
-    this->setSubTitle("Please type your email.");
+    this->setTitle(tr("Registration (1/3)"));
+    this->setSubTitle(tr("Please type your username."));
 
-    QLabel * emailLabel = new QLabel("Email address:");
-    this->emailLineEdit = new QLineEdit;
-
+    QLabel * emailLabel = new QLabel(tr("Username:"));
+    this->emailLineEdit = new QLineEdit;    
+    if(acc) this->emailLineEdit->setText(acc->emailmconf);
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(emailLabel, 1, 0);
     layout->addWidget(emailLineEdit, 1, 1);
     this->setLayout(layout);
+
 }
 
-void EmailPage::registerFields()
+void UsernamePage::registerFields()
 {
-    this->registerField("emailmconf*",this->emailLineEdit,0,0);
+    this->registerField("emailmconf*",this->emailLineEdit,0,0); //username is the 'emailmconf' in accounts.xml
 }
 
-UrlPage::UrlPage(){
+bool UsernamePage::isComplete() const
+{
+    if (field("emailmconf").toString().isEmpty()) return false;
+    else return true;
 
-    this->setTitle("Registration (2/2) ");
-    this->setSubTitle("Please type the URL of your conference room.");
+}
 
-    QLabel * url = new QLabel("URL:");
+UrlPage::UrlPage(const UserAccount *_acc){
+    acc=_acc;
+    this->setTitle(tr("Registration (2/3)"));
+    this->setSubTitle(tr("Please type the URL of your conference room."));
+
+    QLabel * url = new QLabel(tr("URL:"));
     urlLineEdit = new QLineEdit;
+    if(acc) this->urlLineEdit->setText(acc->meeting);
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(url, 1, 0);
@@ -87,14 +95,13 @@ UrlPage::UrlPage(){
 
 void UrlPage::registerFields()
 {
-    this->registerField("url*",this->urlLineEdit,0,0);
+    this->registerField("url",this->urlLineEdit,0,0);
 }
 
 ActivationPage::ActivationPage()
 {
-    this->setTitle("Activation (1/1)");
-    this->setSubTitle("Click on the link below. You will be redirected<br>"
-                      "to the website to activate your account");
+    this->setTitle(tr("Activation (3/3)"));
+    this->setSubTitle(tr("Click on the link below. You will be redirected to the website to activate your account."));
 
     QString stringToken = token::calcToken();
     this->token = stringToken;
@@ -105,23 +112,18 @@ ActivationPage::ActivationPage()
     QLineEdit * activationLineEdit = new QLineEdit;
     activationLineEdit->setText(activationString);
     activationLineEdit->setCursorPosition(0);
-    QString link = "<a href=\""+activationString+"\">Activate account</a>";
+    activationLineEdit->setReadOnly(true);
+    QString link = "<a href=\""+activationString+"\">"+tr("Activate account")+"</a>";
     linkLabel = new QLabel(link);
+    linkLabel->setOpenExternalLinks(true);    
 
-    //connect(linkLabel,SIGNAL(linkActivated(link))),this,SLOT(slotActivated());
-
-    QLabel * orLabel = new QLabel("If you prefer, you can copy and paste the <br>URL below in your browser.");
+    QLabel * orLabel = new QLabel(tr("If you prefer, you can copy and paste the URL below in your browser."));
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(linkLabel, 1, 0);
     layout->addWidget(orLabel,2,0);
     layout->addWidget(activationLineEdit,3,0);
     this->setLayout(layout);
-}
-
-bool ActivationPage::isComplete()
-{
-    return this->accepted;
 }
 
 void ActivationPage::slotActivated()
@@ -137,10 +139,9 @@ QString ActivationPage::getToken()
 QWizardPage * wizard::createIntroPage()
 {
     QWizardPage *page = new QWizardPage;
-    page->setTitle("Introduction");
+    page->setTitle(tr("Introduction"));
 
-    QLabel * introLabel = new QLabel("This wizard will help you register and activate "
-                               "your account.");
+    QLabel * introLabel = new QLabel(tr("This wizard will help you register and activate your account."));
     introLabel->setWordWrap(true);
 
     QVBoxLayout *layout = new QVBoxLayout;
@@ -153,9 +154,9 @@ QWizardPage * wizard::createIntroPage()
 QWizardPage * wizard::createConclusionPage()
 {
     QWizardPage *page = new QWizardPage;
-    page->setTitle("Conclusion");
+    page->setTitle(tr("Conclusion"));
 
-    QLabel *label = new QLabel("You are now successfully registered!");
+    QLabel *label = new QLabel(tr("Your account is now successfully configured! Make sure you activated your account."));
     label->setWordWrap(true);
 
     QVBoxLayout *layout = new QVBoxLayout;
@@ -191,17 +192,17 @@ void wizard::registerFields()
     this->pageUrlRegistration->registerFields();
 }
 
-wizard::wizard(){
+wizard::wizard(const UserAccount *_acc){
 
-
-    QString translatorFileName = QLatin1String("qt_");
-    translatorFileName += QLocale::system().name();
+    acc = _acc;
+    //QString translatorFileName = QLatin1String("qt_");
+    //translatorFileName += QLocale::system().name();
     /*QTranslator *translator = new QTranslator(&app);
     if (translator->load(translatorFileName, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         app.installTranslator(translator);
     */
-    this->pageEmailRegistration = new EmailPage();
-    this->pageUrlRegistration = new UrlPage();
+    this->pageEmailRegistration = new UsernamePage(acc);
+    this->pageUrlRegistration = new UrlPage(acc);
     this->pageActivation = new ActivationPage();
 
 
@@ -211,7 +212,7 @@ wizard::wizard(){
     this->addPage(this->pageActivation);
     this->addPage(createConclusionPage());    
 
-    this->setWindowTitle("Account Wizard");
+    this->setWindowTitle(tr("Account Wizard"));
 
     this->registerFields();
 

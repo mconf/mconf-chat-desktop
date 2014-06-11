@@ -138,7 +138,7 @@ public:
 		if(!v.exists())
 			p.mkdir("tmp-sounds");
 		Iconset::setSoundPrefs(v.absolutePath(), this, SLOT(playSound(QString)));
-		connect(URLObject::getInstance(), SIGNAL(openURL(QString)), SLOT(openURL(QString)));
+        connect(URLObject::getInstance(), SIGNAL(openURL(QString)), SLOT(openURL(QString)));
 	}
 
 	~PsiConObject()
@@ -167,7 +167,7 @@ private:
 	// ripped from profiles.cpp
 	bool folderRemove(const QDir &_d)
 	{
-		QDir d = _d;
+        QDir d = _d;
 
 		QStringList entries = d.entryList();
 		for(QStringList::Iterator it = entries.begin(); it != entries.end(); ++it) {
@@ -378,7 +378,8 @@ bool PsiCon::init()
 #endif
 
 	d->contactList = new PsiContactList(this);
-
+    w=0;
+    wz=0;
 	connect(d->contactList, SIGNAL(accountAdded(PsiAccount*)), SIGNAL(accountAdded(PsiAccount*)));
 	connect(d->contactList, SIGNAL(accountRemoved(PsiAccount*)), SIGNAL(accountRemoved(PsiAccount*)));
 	connect(d->contactList, SIGNAL(accountCountChanged()), SIGNAL(accountCountChanged()));
@@ -516,6 +517,7 @@ bool PsiCon::init()
 	connect(d->mainwin, SIGNAL(closeProgram()), SLOT(closeProgram()));
 	connect(d->mainwin, SIGNAL(changeProfile()), SLOT(changeProfile()));
 	connect(d->mainwin, SIGNAL(doManageAccounts()), SLOT(doManageAccounts()));
+    connect(d->mainwin, SIGNAL(doWizard()), SLOT(doWizard()));
 	connect(d->mainwin, SIGNAL(doGroupChat()), SLOT(doGroupChat()));
 	connect(d->mainwin, SIGNAL(blankMessage()), SLOT(doNewBlankMessage()));
 	connect(d->mainwin, SIGNAL(statusChanged(int)), SLOT(statusMenuChanged(int)));
@@ -834,6 +836,13 @@ void PsiCon::doManageAccounts()
             promptUserToCreateAccount();
 		}
 	}
+}
+
+void PsiCon::doWizard()
+{
+
+    runWizard();
+
 }
 
 void PsiCon::doGroupChat()
@@ -1155,7 +1164,7 @@ void PsiCon::doOptions()
 {
 	OptionsDlg *w = (OptionsDlg *)dialogFind("OptionsDlg");
 	if(w)
-		bringToFront(w);
+        bringToFront(w);
 	else {
 		w = new OptionsDlg(this);
 		connect(w, SIGNAL(applyOptions()), SLOT(slotApplyOptions()));
@@ -1727,15 +1736,27 @@ PsiActionList *PsiCon::actionList() const
  */
 void PsiCon::promptUserToCreateAccount()
 {
-    AccountModifyDlg *w = new AccountModifyDlg(this);
-    //AccountModifyDlg w(this);
-    //w.exec();
 
-    //Start Wizard
-    wz = new wizard();
-    connect(wz,SIGNAL(accepted()),this,SLOT(slotAccepted()));
-    connect(this,SIGNAL(wizardDone(QString,QString,QString,QString)),w,SLOT(saveWizard(QString,QString,QString,QString)));
-    wz->show();
+    if(wz){
+        AccountModifyDlg w(this);
+        w.exec();
+        return;
+    }else runWizard();
+}
+
+void PsiCon::runWizard()
+{
+    if((!wz) && (!w)){
+        w = new AccountModifyDlg(this);
+        //Start Wizard
+        wz = new wizard(&(d->contactList->defaultAccount()->userAccount()));
+        connect(wz,SIGNAL(accepted()),this,SLOT(slotAccepted()));
+        connect(this,SIGNAL(wizardDone(QString,QString,QString)),w,SLOT(saveWizard(QString,QString,QString)));
+        wz->exec();
+    } else {
+        wz->restart();
+        wz->show();
+    }
 }
 
 void PsiCon:: slotAccepted()
@@ -1745,7 +1766,7 @@ void PsiCon:: slotAccepted()
     this->wzEmailmconf = wz->getEmailMconf();
     this->wzUrl = wz->getUrl();
     this->wzToken = wz->pageActivation->getToken();
-    emit wizardDone(this->wzUsername,this->wzEmailmconf,this->wzUrl,this->wzToken);
+    emit wizardDone(this->wzEmailmconf,this->wzUrl,this->wzToken);
 
 }
 

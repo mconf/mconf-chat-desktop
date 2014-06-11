@@ -29,6 +29,7 @@
 #include "tabbablewidget.h"
 #include "tunecontrollermanager.h"
 #include "wizard.h"
+#include "accountmodifydlg.h"
 
 using namespace XMPP;
 
@@ -128,10 +129,12 @@ public:
 
     //wizard data.
     wizard *wz;
+    AccountModifyDlg *w;
     QString wzUsername;
     QString wzEmailmconf;
     QString wzUrl;
     QString wzToken;
+    void runWizard();
 
 
 
@@ -145,7 +148,7 @@ signals:
 	void emitOptionsUpdate();
 	void restoringSavedChatsChanged();
     //wizard
-    void wizardDone(QString username, QString emailmconf, QString url, QString token);
+    void wizardDone( QString emailmconf, QString url, QString token);
 
 
 public slots:
@@ -159,6 +162,7 @@ public slots:
 	void closeProgram();
 	void changeProfile();
 	void doManageAccounts();
+    void doWizard();
 	void doGroupChat();
 	void doNewBlankMessage();
 	void doOptions();
@@ -201,7 +205,7 @@ private:
 	void setShortcuts();
 
 	friend class PsiAccount; // FIXME
-	void promptUserToCreateAccount();
+	void promptUserToCreateAccount();    
 	QString optionsFile() const;
     void doQuit(int);
 

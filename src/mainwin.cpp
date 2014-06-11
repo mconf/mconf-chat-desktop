@@ -504,6 +504,7 @@ void MainWin::registerAction( IconAction* action )
 //		{ "menu_join_groupchat", activated, this, SIGNAL( doGroupChat() ) },
 #endif
 		{ "menu_account_setup",  activated, this, SIGNAL( doManageAccounts() ) },
+        { "menu_run_wizard",  activated, this, SIGNAL( doWizard() ) },
 		{ "menu_options",        activated, this, SIGNAL( doOptions() ) },
 //		{ "menu_file_transfer",  activated, this, SIGNAL( doFileTransDlg() ) },
 		{ "menu_toolbars",       activated, this, SIGNAL( doToolbars() ) },
@@ -796,7 +797,8 @@ void MainWin::buildMainMenu()
 #endif
 			<< "separator"
 */
-	actions << "menu_account_setup";
+    actions << "menu_account_setup"
+            <<  "menu_run_wizard" ;
 	if (PsiOptions::instance()->getOption("options.ui.menu.main.change-profile").toBool()) {
 		actions << "menu_change_profile";
 	}
@@ -832,9 +834,10 @@ void MainWin::buildGeneralMenu(QMenu* menu)
 #endif
 */
 	actions << "menu_account_setup"
+            << "menu_run_wizard"
 			<< "menu_options"
 //			<< "menu_file_transfer"
-               ;
+            ;
 	if (PsiOptions::instance()->getOption("options.ui.menu.main.change-profile").toBool()) {
 		actions << "menu_change_profile";
 	}
