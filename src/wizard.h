@@ -50,6 +50,8 @@ class wizard: public QWizard
     Q_OBJECT
 public:
     wizard(const UserAccount * _acc);
+    wizard();
+    void setupWizard();
 
     const UserAccount * acc;
     QWizardPage *createIntroPage();

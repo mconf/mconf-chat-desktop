@@ -1359,8 +1359,8 @@ const QString &PsiAccount::id() const
 const UserAccount & PsiAccount::userAccount() const
 {
 	// save the roster and pgp key bindings
-	d->acc.roster.clear();
-	d->acc.keybind.clear();
+    d->acc.roster.clear();
+    d->acc.keybind.clear();
 	foreach(UserListItem* u, d->userList) {
 		if(u->inList())
 			d->acc.roster += *u;

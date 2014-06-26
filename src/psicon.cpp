@@ -1748,8 +1748,12 @@ void PsiCon::runWizard()
 {
     if((!wz) && (!w)){
         w = new AccountModifyDlg(this);
+
         //Start Wizard
-        wz = new wizard(&(d->contactList->defaultAccount()->userAccount()));
+        if (d->contactList->accounts().count() == 0)
+            wz = new wizard();
+        else
+            wz = new wizard(&(d->contactList->defaultAccount()->userAccount()));
         connect(wz,SIGNAL(accepted()),this,SLOT(slotAccepted()));
         connect(this,SIGNAL(wizardDone(QString,QString,QString)),w,SLOT(saveWizard(QString,QString,QString)));
         wz->exec();

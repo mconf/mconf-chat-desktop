@@ -193,8 +193,19 @@ void wizard::registerFields()
 }
 
 wizard::wizard(const UserAccount *_acc){
-
     acc = _acc;
+    setupWizard();
+}
+
+wizard::wizard(){
+    acc = NULL;
+    setupWizard();
+
+
+}
+
+
+void wizard::setupWizard(){
     //QString translatorFileName = QLatin1String("qt_");
     //translatorFileName += QLocale::system().name();
     /*QTranslator *translator = new QTranslator(&app);
@@ -217,3 +228,5 @@ wizard::wizard(const UserAccount *_acc){
     this->registerFields();
 
 }
+
+
